@@ -6,6 +6,7 @@ namespace FinancialControl.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class ExpenseController : ControllerBase
     {
         private readonly IExpenseService _expenseService;
@@ -29,7 +30,7 @@ namespace FinancialControl.Controllers
         }
 
         // passando parametro e definindo nome
-        [HttpGet("{id:int}", Name = "GetReceita")]
+        [HttpGet("{id:int}", Name = "GetDespesa")]
         public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetById(int id)
         {
             var expenseDto = await _expenseService.GetExpenseById(id);

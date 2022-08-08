@@ -6,6 +6,7 @@ namespace FinancialControl.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class RevenueController : ControllerBase
     {
         private readonly IRevenueService _revenueService;
