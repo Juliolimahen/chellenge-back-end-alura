@@ -15,7 +15,7 @@ namespace FinancialControl.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripition = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Value = table.Column<double>(type: "float(20)", precision: 20, scale: 2, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -30,7 +30,7 @@ namespace FinancialControl.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripition = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Value = table.Column<double>(type: "float(20)", precision: 20, scale: 2, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -41,7 +41,7 @@ namespace FinancialControl.Migrations
 
             migrationBuilder.InsertData(
                 table: "Expenses",
-                columns: new[] { "Id", "Date", "Descripition", "Value" },
+                columns: new[] { "Id", "Date", "Description", "Value" },
                 values: new object[,]
                 {
                     { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mensalidade facul", 700.0 },
@@ -50,7 +50,7 @@ namespace FinancialControl.Migrations
 
             migrationBuilder.InsertData(
                 table: "Revenues",
-                columns: new[] { "Id", "Date", "Descripition", "Value" },
+                columns: new[] { "Id", "Date", "Description", "Value" },
                 values: new object[,]
                 {
                     { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Salário", 3000.0 },

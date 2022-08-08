@@ -1,4 +1,6 @@
-﻿namespace FinancialControl.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FinancialControl.Models
 {
     /// <summary>
     /// Classe responsável por modelar as receitas
@@ -6,20 +8,20 @@
     public class Revenue
     {
         public int Id { get; set; }
-        public string? Descripition { get; set; }
+        public string? Description { get; set; }
         public double Value { get; set; }
         public DateTime Date { get; set; }
 
-        public Revenue(int id, string descripition, double value, DateTime date)
+        public Revenue(int id, string description, double value, DateTime date)
         {
             Id = id;
-            Descripition = descripition;
+            Description = description;
             Value = value;
             Date = date;
         }
-
         public Revenue()
         {
+
         }
     }
 }

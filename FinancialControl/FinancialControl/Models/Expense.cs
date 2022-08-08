@@ -8,14 +8,14 @@ namespace FinancialControl.Models
     public class Expense
     {
         public int Id { get; set; }
-        public string? Descripition { get; set; }
+        public string? Description { get; set; }
         public double Value { get; set; }
         public DateTime Date { get; set; }
 
-        public Expense(int id, string descripition, double value, DateTime date)
+        public Expense(int id, string description, double value, DateTime date)
         {
             Id = id;
-            Descripition = descripition;
+            Description = description;
             Value = value;
             Date = date;
         }

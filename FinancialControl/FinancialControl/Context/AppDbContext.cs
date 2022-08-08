@@ -18,26 +18,27 @@ namespace FinancialControl.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Revenue>().HasKey(x => x.Id);
-            modelBuilder.Entity<Revenue>().Property(x => x.Descripition).HasMaxLength(255).IsRequired();
+            modelBuilder.Entity<Revenue>().Property(x => x.Description).HasMaxLength(255).IsRequired();
             modelBuilder.Entity<Revenue>().Property(x => x.Value).HasPrecision(20, 2).IsRequired();
             modelBuilder.Entity<Revenue>().Property(x => x.Date).IsRequired();
 
             modelBuilder.Entity<Expense>().HasKey(x => x.Id);
-            modelBuilder.Entity<Expense>().Property(x => x.Descripition).HasMaxLength(255).IsRequired();
+            modelBuilder.Entity<Expense>().Property(x => x.Description).HasMaxLength(255).IsRequired();
             modelBuilder.Entity<Expense>().Property(x => x.Value).HasPrecision(20, 2).IsRequired();
             modelBuilder.Entity<Expense>().Property(x => x.Date).IsRequired();
 
-            modelBuilder.Entity<Revenue>().HasData(new Revenue{
-                Id=1,
-                Descripition="Salário",
-                Value=3000,
-                Date=new DateTime(),
+            modelBuilder.Entity<Revenue>().HasData(new Revenue
+            {
+                Id = 1,
+                Description = "Salário",
+                Value = 3000,
+                Date = new DateTime(),
             });
 
             modelBuilder.Entity<Revenue>().HasData(new Revenue
             {
                 Id = 2,
-                Descripition = "Salário bônus",
+                Description = "Salário bônus",
                 Value = 3000,
                 Date = new DateTime(),
             });
@@ -45,7 +46,7 @@ namespace FinancialControl.Context
             modelBuilder.Entity<Expense>().HasData(new Expense
             {
                 Id = 1,
-                Descripition = "Mensalidade facul",
+                Description = "Mensalidade facul",
                 Value = 700,
                 Date = new DateTime(),
             });
@@ -53,7 +54,7 @@ namespace FinancialControl.Context
             modelBuilder.Entity<Expense>().HasData(new Expense
             {
                 Id = 2,
-                Descripition = "Internet",
+                Description = "Internet",
                 Value = 70,
                 Date = new DateTime(),
             });

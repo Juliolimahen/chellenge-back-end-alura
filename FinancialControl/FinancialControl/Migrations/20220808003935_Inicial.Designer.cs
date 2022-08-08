@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinancialControl.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220807155120_Inicial")]
+    [Migration("20220808003935_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace FinancialControl.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Descripition")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -53,14 +53,14 @@ namespace FinancialControl.Migrations
                         {
                             Id = 1,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descripition = "Mensalidade facul",
+                            Description = "Mensalidade facul",
                             Value = 700.0
                         },
                         new
                         {
                             Id = 2,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descripition = "Internet",
+                            Description = "Internet",
                             Value = 70.0
                         });
                 });
@@ -76,7 +76,7 @@ namespace FinancialControl.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Descripition")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -94,14 +94,14 @@ namespace FinancialControl.Migrations
                         {
                             Id = 1,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descripition = "Salário",
+                            Description = "Salário",
                             Value = 3000.0
                         },
                         new
                         {
                             Id = 2,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Descripition = "Salário bônus",
+                            Description = "Salário bônus",
                             Value = 3000.0
                         });
                 });
