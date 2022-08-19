@@ -18,8 +18,11 @@ public class RevenueRepository : IRevenueRepository
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Revenue>> GetAll()
+    public async Task<IEnumerable<Revenue>> GetAll(Expression<Func<Revenue, bool>>? predicate = null)
     {
+        if (predicate is not null)
+            return await _context.Set<Revenue>().Where(predicate).ToListAsync();
+
         return await _context.Revenues.ToListAsync();
     }
 

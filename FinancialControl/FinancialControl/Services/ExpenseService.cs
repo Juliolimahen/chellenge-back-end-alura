@@ -17,7 +17,7 @@ public class ExpenseService : IExpenseService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ExpenseDto>> GetExpenses(string description)
+    public async Task<IEnumerable<ExpenseDto>> GetExpenses(string? description)
     {
         IEnumerable<Expense> expenses;
 

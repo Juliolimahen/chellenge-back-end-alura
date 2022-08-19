@@ -17,10 +17,16 @@ public class RevenueService : IRevenueService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<RevenueDto>> GetRevenues()
+    public async Task<IEnumerable<RevenueDto>> GetRevenues(string? description)
     {
-        var revenueEntity = await _revenueRepository.GetAll();
-        return _mapper.Map<IEnumerable<RevenueDto>>(revenueEntity);
+        IEnumerable<Revenue> revenues;
+
+        if (!string.IsNullOrEmpty(description))
+            revenues = await _revenueRepository.GetAll(x => x.Description.Contains(description));
+        else
+            revenues = await _revenueRepository.GetAll();
+
+        return _mapper.Map<IEnumerable<RevenueDto>>(revenues);
     }
 
     public async Task<RevenueDto> GetRevenueById(int id)
