@@ -1,6 +1,7 @@
 using FinancialControl.Context;
 using FinancialControl.Repositories.Interface;
 using FinancialControl.Services;
+using FinancialControl.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 
 builder.Services.AddScoped<IRevenueService, RevenueService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
+builder.Services.AddScoped<ISummaryService, SummaryService>();
 
 
 var app = builder.Build();

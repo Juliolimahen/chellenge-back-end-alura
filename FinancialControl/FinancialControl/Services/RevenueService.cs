@@ -17,16 +17,15 @@ public class RevenueService : IRevenueService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<RevenueDto>> GetRevenues(string? description)
+    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenues(string? description)
     {
-        IEnumerable<Revenue> revenues;
+        ResponseDto<IEnumerable<RevenueDto>> response = new();
 
-        if (!string.IsNullOrEmpty(description))
-            revenues = await _revenueRepository.GetAll(x => x.Description.Contains(description));
-        else
-            revenues = await _revenueRepository.GetAll();
-
-        return _mapper.Map<IEnumerable<RevenueDto>>(revenues);
+        IEnumerable<Revenue> revenues = !string.IsNullOrEmpty(description)
+            ? await _revenueRepository.GetAll(x => x.Description.Contains(description))
+            : await _revenueRepository.GetAll();
+        response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
+        return response;
     }
 
     public async Task<RevenueDto> GetRevenueById(int id)
@@ -54,6 +53,7 @@ public class RevenueService : IRevenueService
 
         var revenueEntity = _mapper.Map<Revenue>(revenueDto);
         await _revenueRepository.Create(revenueEntity);
+        response.Data = _mapper.Map<RevenueDto>(revenueEntity);
         //revenueDto.Id = revenueEntity.Id;
         return response;
     }
@@ -86,9 +86,12 @@ public class RevenueService : IRevenueService
         await _revenueRepository.Delete(revenueEntity.Id);
     }
 
-    public async Task<IEnumerable<RevenueDto>> GetRevenueByDate(string year, string month)
+    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDate(string year, string month)
     {
+        ResponseDto<IEnumerable<RevenueDto>> response = new();
+
         var revenues = await _revenueRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
-        return _mapper.Map<IEnumerable<RevenueDto>>(revenues);
+        response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
+        return response;
     }
 }

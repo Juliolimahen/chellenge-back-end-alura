@@ -17,8 +17,10 @@ public class ExpenseService : IExpenseService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ExpenseDto>> GetExpenses(string? description)
+    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenses(string? description)
     {
+        ResponseDto<IEnumerable<ExpenseDto>> response = new();
+
         IEnumerable<Expense> expenses;
 
         if (!string.IsNullOrEmpty(description))
@@ -26,7 +28,9 @@ public class ExpenseService : IExpenseService
         else
             expenses = await _expenseRepository.GetAll();
 
-        return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        response.Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+
+        return response;
     }
 
     public async Task<ExpenseDto> GetExpenseById(int id)
@@ -86,10 +90,13 @@ public class ExpenseService : IExpenseService
         await _expenseRepository.Delete(expenseEntity.Id);
     }
 
-    public async Task<IEnumerable<ExpenseDto>> GetExpenseByDate(string year, string month)
+    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDate(string year, string month)
     {
+        ResponseDto<IEnumerable<ExpenseDto>> response = new();
+
         var expenses = await _expenseRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
 
-        return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        response.Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        return response;
     }
 }
