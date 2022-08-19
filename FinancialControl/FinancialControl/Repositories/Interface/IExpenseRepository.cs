@@ -5,7 +5,7 @@ namespace FinancialControl.Repositories.Interface
 {
     public interface IExpenseRepository
     {
-        Task<IEnumerable<Expense>> GetAll();
+        Task<IEnumerable<Expense>> GetAll(Expression<Func<Expense, bool>>? predicate = null);
         Task<Expense> GetById(int id);
         Task<Expense> Create(Expense expense);
         Task<Expense> Update(Expense expense);

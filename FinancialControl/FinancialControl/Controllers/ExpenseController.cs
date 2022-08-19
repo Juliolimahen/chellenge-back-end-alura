@@ -17,9 +17,9 @@ namespace FinancialControl.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAll([FromQuery] string? description)
         {
-            var expensesDto = await _expenseService.GetExpenses();
+            var expensesDto = await _expenseService.GetExpenses(description);
             if (expensesDto is null)
 
                 //404 not found

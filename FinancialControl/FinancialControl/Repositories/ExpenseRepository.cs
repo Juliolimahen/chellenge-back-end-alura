@@ -18,8 +18,11 @@ public class ExpenseRepository : IExpenseRepository
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Expense>> GetAll()
+    public async Task<IEnumerable<Expense>> GetAll(Expression<Func<Expense, bool>>? predicate = null)
     {
+        if (predicate is not null)
+            return await _context.Set<Expense>().Where(predicate).ToListAsync();
+
         return await _context.Expenses.ToListAsync();
     }
 

@@ -17,10 +17,16 @@ public class ExpenseService : IExpenseService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ExpenseDto>> GetExpenses()
+    public async Task<IEnumerable<ExpenseDto>> GetExpenses(string description)
     {
-        var expenseEntity = await _expenseRepository.GetAll();
-        return _mapper.Map<IEnumerable<ExpenseDto>>(expenseEntity);
+        IEnumerable<Expense> expenses;
+
+        if (!string.IsNullOrEmpty(description))
+            expenses = await _expenseRepository.GetAll(x => x.Description.Contains(description));
+        else
+            expenses = await _expenseRepository.GetAll();
+
+        return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
     }
 
     public async Task<ExpenseDto> GetExpenseById(int id)
