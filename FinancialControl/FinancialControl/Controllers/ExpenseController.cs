@@ -83,5 +83,16 @@ namespace FinancialControl.Controllers
             await _expenseService.DeleteExpense(id);
             return Ok(expenseDto);
         }
+
+        [HttpGet("{year}/{month}")]
+        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAllExpenseByDate([FromRoute] string year, [FromRoute] string month)
+        {
+            var expenses = await _expenseService.GetExpenseByDate(year, month);
+            if (expenses.Any())
+            {
+                return Ok(expenses);
+            }
+            return NotFound("No expenses found on this date");
+        }
     }
 }

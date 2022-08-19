@@ -85,4 +85,11 @@ public class ExpenseService : IExpenseService
         var expenseEntity = _expenseRepository.GetById(id).Result;
         await _expenseRepository.Delete(expenseEntity.Id);
     }
+
+    public async Task<IEnumerable<ExpenseDto>> GetExpenseByDate(string year, string month)
+    {
+        var expenses = await _expenseRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
+
+        return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+    }
 }
