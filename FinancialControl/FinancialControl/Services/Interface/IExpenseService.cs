@@ -1,13 +1,12 @@
 ﻿using FinancialControl.Dtos;
 
-namespace FinancialControl.Services
+namespace FinancialControl.Services;
+
+public interface IExpenseService
 {
-    public interface IExpenseService
-    {
-        Task<IEnumerable<ExpenseDto>> GetExpenses();
-        Task<ExpenseDto> GetExpenseById(int id);
-        Task<ResponseDto<ExpenseDto>> CreateExpense(CreateExpenseDto expenseDto);
-        Task <ResponseDto<ExpenseDto>>UpdateExpense(ExpenseDto expenseDto);
-        Task DeleteExpense(int id);
-    }
+    Task<IEnumerable<ExpenseDto>> GetExpenses();
+    Task<ExpenseDto> GetExpenseById(int id);
+    Task<ResponseDto<ExpenseDto>> CreateExpense(CreateExpenseDto expenseDto);
+    Task <ResponseDto<ExpenseDto>>UpdateExpense(ExpenseDto expenseDto);
+    Task DeleteExpense(int id);
 }

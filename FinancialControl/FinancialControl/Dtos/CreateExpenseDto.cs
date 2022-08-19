@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FinancialControl.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinancialControl.Dtos
 {
@@ -14,5 +15,6 @@ namespace FinancialControl.Dtos
 
         [Required(ErrorMessage = "The Date is Required")]
         public DateTime Date { get; set; }
+        public Category? Category { get; set; }
     }
 }
