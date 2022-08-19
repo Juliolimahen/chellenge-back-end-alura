@@ -88,7 +88,7 @@ namespace FinancialControl.Controllers
         [HttpGet("{year}/{month}")]
         public async Task<ActionResult<IEnumerable<RevenueDto>>> GetAllExpenseByDate([FromRoute] string year, [FromRoute] string month)
         {
-            var revenues = await _revenueService.GetExpenseByDate(year, month);
+            var revenues = await _revenueService.GetRevenueByDate(year, month);
             return revenues.Any() ? (ActionResult<IEnumerable<RevenueDto>>)Ok(revenues) : (ActionResult<IEnumerable<RevenueDto>>)NotFound("No expenses found on this date");
         }
     }

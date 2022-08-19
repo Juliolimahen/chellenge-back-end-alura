@@ -86,7 +86,7 @@ public class RevenueService : IRevenueService
         await _revenueRepository.Delete(revenueEntity.Id);
     }
 
-    public async Task<IEnumerable<RevenueDto>> GetExpenseByDate(string year, string month)
+    public async Task<IEnumerable<RevenueDto>> GetRevenueByDate(string year, string month)
     {
         var revenues = await _revenueRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
         return _mapper.Map<IEnumerable<RevenueDto>>(revenues);
