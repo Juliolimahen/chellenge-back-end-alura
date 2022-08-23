@@ -12,6 +12,7 @@ namespace FinancialControl.Services
         private readonly IRevenueRepository _revenueRepository;
         private readonly IExpenseRepository _expenseRepository;
 
+
         public SummaryService(IExpenseRepository expenseRepository, IRevenueRepository revenueRepository)
         {
             _expenseRepository = expenseRepository;

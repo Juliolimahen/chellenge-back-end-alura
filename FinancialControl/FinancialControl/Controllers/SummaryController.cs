@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialControl.Controllers
 {
-    public class SummaryController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    [Produces("application/json")]
+    public class SummaryController : ControllerBase
     {
         private readonly ISummaryService _summaryService;
 

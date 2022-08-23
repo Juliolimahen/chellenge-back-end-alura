@@ -91,6 +91,14 @@ public class RevenueService : IRevenueService
         ResponseDto<IEnumerable<RevenueDto>> response = new();
 
         var revenues = await _revenueRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
+
+        if (!revenues.Any())
+        {
+            response.Success = false;
+            response.Erros.Add($"No expenses found on this date {month}/{year}");
+            return response;
+        }
+
         response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
         return response;
     }

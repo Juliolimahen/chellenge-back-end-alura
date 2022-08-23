@@ -7,6 +7,6 @@ public class ValueCategoryDto
 {
     public Category Category { get; set; }
 
-    [Precision(14, 2)]
+    [Precision(20, 2)]
     public double Value { get; set; }
 }

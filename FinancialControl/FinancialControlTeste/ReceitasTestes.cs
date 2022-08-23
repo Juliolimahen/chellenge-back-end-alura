@@ -12,7 +12,7 @@ namespace FinancialControlTestsDomain
     public class ReceitasTestes
     {
         private const string? DESCRICAO = "Salário";
-        private  DateTime DATA = new DateTime(2022, 08, 01);
+        private DateTime DATA = new DateTime(2022, 08, 01);
         private const double VALOR = 2500.78;
 
         [Fact]
@@ -38,7 +38,7 @@ namespace FinancialControlTestsDomain
         }
 
         [Fact]
-        public void TestaValidacaoReceitas()
+        public void TestaReceitaNaoNulas()
         {
             //Arrange
             string Descricao = "Salário";
@@ -46,12 +46,36 @@ namespace FinancialControlTestsDomain
             DateTime Data = new DateTime(2022, 08, 01);
 
             //Act
-            var receita = new Revenue()
+            var receita = new RevenueDto()
             {
+                Date = Data,
+                Description = Descricao,
+                Value = Valor,
             };
 
             //Assert
-            //Assert.Throws<Exception>();
+            Assert.NotNull(receita.Description);
+            Assert.NotNull(receita.Date);
+            Assert.NotNull(receita.Value);
+            //Assert.Throws<Exception>(() => new RevenueDto().Description = Descricao);
+        }
+
+        [Fact]
+        public void TestaTamanhoCampos() {
+            //Arrange
+            string Descricao = "Salário";
+            double Valor = 2500.78;
+            DateTime Data = new DateTime(2022, 08, 01);
+
+            //Act
+            var receita = new RevenueDto()
+            {
+                Date = Data,
+                Description = Descricao,
+                Value = Valor,
+            };
+
+            //Assert 
         }
     }
 }

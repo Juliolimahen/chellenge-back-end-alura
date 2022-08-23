@@ -95,6 +95,12 @@ public class ExpenseService : IExpenseService
         ResponseDto<IEnumerable<ExpenseDto>> response = new();
 
         var expenses = await _expenseRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
+        if (!expenses.Any())
+        {
+            response.Success = false;
+            response.Erros.Add($"No expenses found on this date {month}/{year}");
+            return response;
+        }
 
         response.Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
         return response;
