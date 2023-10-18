@@ -58,7 +58,7 @@ public class ExpenseService : IExpenseService
 
         var expenseEntity = _mapper.Map<Expense>(expenseDto);
         await _expenseRepository.Create(expenseEntity);
-        //expenseDto.Id = expenseEntity.Id;
+        expenseDto.Id = expenseEntity.Id;
         return response;
     }
 

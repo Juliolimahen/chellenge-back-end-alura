@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinancialControl.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220808003935_Inicial")]
-    partial class Inicial
+    [Migration("20231018130923_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -31,6 +31,9 @@ namespace FinancialControl.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -52,6 +55,7 @@ namespace FinancialControl.Migrations
                         new
                         {
                             Id = 1,
+                            Category = 0,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Mensalidade facul",
                             Value = 700.0
@@ -59,6 +63,7 @@ namespace FinancialControl.Migrations
                         new
                         {
                             Id = 2,
+                            Category = 0,
                             Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Internet",
                             Value = 70.0

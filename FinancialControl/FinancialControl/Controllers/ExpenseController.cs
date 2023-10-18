@@ -2,93 +2,82 @@
 using FinancialControl.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinancialControl.Controllers
+namespace FinancialControl.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+[Produces("application/json")]
+public class ExpenseController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    [Produces("application/json")]
-    public class ExpenseController : ControllerBase
+    private readonly IExpenseService _expenseService;
+
+    public ExpenseController(IExpenseService expenseService)
     {
-        private readonly IExpenseService _expenseService;
+        _expenseService = expenseService;
+    }
 
-        public ExpenseController(IExpenseService expenseService)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAll([FromQuery] string? description)
+    {
+        var expensesDto = await _expenseService.GetExpenses(description);
+        if (expensesDto is null)
+            return NotFound("Expenses not found");
+
+        return Ok(expensesDto);
+    }
+
+    [HttpGet("{id:int}", Name = "GetDespesa")]
+    public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetById(int id)
+    {
+        var expenseDto = await _expenseService.GetExpenseById(id);
+        if (expenseDto is null)
+
+            return NotFound("Expense not found");
+
+        return Ok(expenseDto);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create([FromBody] CreateExpenseDto expenseDto)
+    {
+        if (expenseDto is null) { return BadRequest("Invalid Data"); }
+
+        var expense = await _expenseService.CreateExpense(expenseDto);
+
+        if (!expense.Success) { return BadRequest(expense); }
+
+        return CreatedAtAction(nameof(GetById), new { id = expenseDto.Id }, expenseDto);
+        //return Ok(expenseDto);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update(int id, [FromBody] ExpenseDto expenseDto)
+    {
+        if (id != expenseDto.Id || expenseDto is null) { return BadRequest(); }
+
+        var expense = await _expenseService.UpdateExpense(expenseDto);
+
+        if (!expense.Success) { return BadRequest(expense); }
+        return Ok(expenseDto);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var expenseDto = await _expenseService.GetExpenseById(id);
+        if (expenseDto is null)
         {
-            _expenseService = expenseService;
+            return NotFound("Expense not found");
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAll([FromQuery] string? description)
-        {
-            var expensesDto = await _expenseService.GetExpenses(description);
-            if (expensesDto is null)
+        await _expenseService.DeleteExpense(id);
+        return Ok(expenseDto);
+    }
 
-                //404 not found
-                return NotFound("Expenses not found");
-
-            //200OK
-            return Ok(expensesDto);
-        }
-
-        // passando parametro e definindo nome
-        [HttpGet("{id:int}", Name = "GetDespesa")]
-        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetById(int id)
-        {
-            var expenseDto = await _expenseService.GetExpenseById(id);
-            if (expenseDto is null)
-
-                //404 not found
-                return NotFound("Expense not found");
-
-            //200OK
-            return Ok(expenseDto);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateExpenseDto expenseDto)
-        {
-            if (expenseDto is null) { return BadRequest("Invalid Data"); }
-
-            var expense = await _expenseService.CreateExpense(expenseDto);
-
-            if (!expense.Success) { return BadRequest(expense); }
-
-            //201 created
-            //return new CreatedAtRouteResult("GetExpense", new { id = expense.Id },
-            return Ok(expenseDto);
-        }
-
-        // tipo parâmetro
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> Update(int id, [FromBody] ExpenseDto expenseDto)
-        {
-            if (id != expenseDto.Id) { return BadRequest(); }
-
-            if (expenseDto is null) { return BadRequest(); }
-
-            var expense = await _expenseService.UpdateExpense(expenseDto);
-
-            if (!expense.Success) { return BadRequest(expense); }
-            return Ok(expenseDto);
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var expenseDto = await _expenseService.GetExpenseById(id);
-            if (expenseDto is null)
-            {
-                return NotFound("Expense not found");
-            }
-
-            await _expenseService.DeleteExpense(id);
-            return Ok(expenseDto);
-        }
-
-        [HttpGet("{year}/{month}")]
-        public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAllExpenseByDate([FromRoute] string year, [FromRoute] string month)
-        {
-            var expenses = await _expenseService.GetExpenseByDate(year, month);
-            return Ok(expenses);
-        }
+    [HttpGet("{year}/{month}")]
+    public async Task<ActionResult<IEnumerable<ExpenseDto>>> GetAllExpenseByDate([FromRoute] string year, [FromRoute] string month)
+    {
+        var expenses = await _expenseService.GetExpenseByDate(year, month);
+        return Ok(expenses);
     }
 }

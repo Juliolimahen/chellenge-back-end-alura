@@ -18,5 +18,24 @@ namespace FinancialControl.Dtos
         [Required(ErrorMessage = "The Date is Required")]
         public DateTime Date { get; set; }
         public Category? Category { get; set; }
+
+        public ExpenseDto(int id, string? description, double value, DateTime date, Category? category)
+        {
+            Id = id;
+            Description = description;
+            Value = value;
+            Date = date;
+            Category = category;
+        }
+
+        public ExpenseDto(int id)
+        {
+            Id = id;
+        }
+
+        public ExpenseDto()
+        {
+
+        }
     }
 }

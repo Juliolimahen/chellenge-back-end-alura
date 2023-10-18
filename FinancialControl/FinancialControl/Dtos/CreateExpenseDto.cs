@@ -1,10 +1,13 @@
 ﻿using FinancialControl.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FinancialControl.Dtos
 {
     public class CreateExpenseDto
     {
+        [JsonIgnore]
+        public int Id { get; set; }
         [Required(ErrorMessage = "The Description is Required")]
         [MinLength(5)]
         [MaxLength(200)]

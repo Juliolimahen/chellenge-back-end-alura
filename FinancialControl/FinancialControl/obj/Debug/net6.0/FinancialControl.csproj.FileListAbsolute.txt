@@ -80,3 +80,8 @@ C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\bin\De
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\obj\Debug\net6.0\staticwebassets\msbuild.FinancialControl.Microsoft.AspNetCore.StaticWebAssets.props
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\obj\Debug\net6.0\staticwebassets\msbuild.build.FinancialControl.props
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.FinancialControl.props
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.FinancialControl.props
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl\obj\Debug\net6.0\staticwebassets.pack.json
