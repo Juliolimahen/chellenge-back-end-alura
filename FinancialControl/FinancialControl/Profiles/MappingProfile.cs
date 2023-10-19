@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
-using FinancialControl.Dtos;
-using FinancialControl.Models;
+using FinancialControl.Core.Models;
+using FinancialControl.Core.Shared.Dtos;
 
-namespace FinancialControl.Profiles
+namespace FinancialControl.WebApi.Profiles;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<Revenue, RevenueDto>().ReverseMap();
-            CreateMap<Expense, ExpenseDto>().ReverseMap();
-            CreateMap<Revenue, CreateRevenueDto>().ReverseMap();
-            CreateMap<Expense, CreateExpenseDto>().ReverseMap();
-        }
+        CreateMap<Revenue, RevenueDto>().ReverseMap();
+        CreateMap<Expense, ExpenseDto>().ReverseMap();
+        CreateMap<Revenue, CreateRevenueDto>().ReverseMap();
+        CreateMap<Expense, CreateExpenseDto>().ReverseMap();
     }
 }

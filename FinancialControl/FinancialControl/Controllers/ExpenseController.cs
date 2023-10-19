@@ -1,8 +1,8 @@
-﻿using FinancialControl.Dtos;
-using FinancialControl.Services;
+﻿using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinancialControl.Controllers;
+namespace FinancialControl.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

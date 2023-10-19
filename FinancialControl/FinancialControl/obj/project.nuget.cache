@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NVmJbN6q/nSR7ceATxpR3QQkR4lEZFpe2RhBYQXunYlq3zxDsTyTatEj2ifF87nHgQvfNpGCzyUt23jGEnOZ7A==",
+  "dgSpecHash": "P+y8Ssf0oBoYvzk/Vj5TIygNqjwTbBF7qlidow3RpVt1O4pukCWgtCLX90A+cjIVd+oBuDpU+6q01bT9T1FFYw==",
   "success": true,
-  "projectFilePath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.csproj",
+  "projectFilePath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DevPC\\.nuget\\packages\\abp\\7.3.0\\abp.7.3.0.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",

@@ -1,0 +1,26 @@
+﻿using FinancialControl.Core.Models.Enums;
+
+namespace FinancialControl.Core.Models;
+
+/// <summary>
+/// Classe responsável por modelar as despesas
+/// </summary>
+public class Expense
+{
+    public int Id { get; set; }
+    public string? Description { get; set; }
+    public double Value { get; set; }
+    public DateTime Date { get; set; }
+    public Category Category { get; set; }
+
+    public Expense(int id, string description, double value, DateTime date)
+    {
+        Id = id;
+        Description = description;
+        Value = value;
+        Date = date;
+        Category = Category;
+    }
+
+    public Expense() { }
+}

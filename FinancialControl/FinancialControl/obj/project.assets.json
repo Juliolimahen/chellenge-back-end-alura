@@ -2814,6 +2814,65 @@
             "related": ".xml"
           }
         }
+      },
+      "FinancialControl.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.8"
+        },
+        "compile": {
+          "bin/placeholder/FinancialControl.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinancialControl.Core.dll": {}
+        }
+      },
+      "FinancialControl.Core.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FinancialControl.Core": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.8"
+        },
+        "compile": {
+          "bin/placeholder/FinancialControl.Core.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinancialControl.Core.Shared.dll": {}
+        }
+      },
+      "FinancialControl.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "FinancialControl.Core": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.8",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.8"
+        },
+        "compile": {
+          "bin/placeholder/FinancialControl.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinancialControl.Data.dll": {}
+        }
+      },
+      "FinancialControl.Manager/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "FinancialControl.Core.Shared": "1.0.0",
+          "FinancialControl.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FinancialControl.Manager.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinancialControl.Manager.dll": {}
+        }
       }
     }
   },
@@ -8862,6 +8921,26 @@
         "timezoneconverter.5.0.0.nupkg.sha512",
         "timezoneconverter.nuspec"
       ]
+    },
+    "FinancialControl.Core/1.0.0": {
+      "type": "project",
+      "path": "../FinancialControl.Core/FinancialControl.Core.csproj",
+      "msbuildProject": "../FinancialControl.Core/FinancialControl.Core.csproj"
+    },
+    "FinancialControl.Core.Shared/1.0.0": {
+      "type": "project",
+      "path": "../FinancialControl.Core.Shared/FinancialControl.Core.Shared.csproj",
+      "msbuildProject": "../FinancialControl.Core.Shared/FinancialControl.Core.Shared.csproj"
+    },
+    "FinancialControl.Data/1.0.0": {
+      "type": "project",
+      "path": "../FinancialControl.Data/FinancialControl.Data.csproj",
+      "msbuildProject": "../FinancialControl.Data/FinancialControl.Data.csproj"
+    },
+    "FinancialControl.Manager/1.0.0": {
+      "type": "project",
+      "path": "../FinancialControl.Manager/FinancialControl.Manager.csproj",
+      "msbuildProject": "../FinancialControl.Manager/FinancialControl.Manager.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8869,6 +8948,9 @@
       "Abp >= 7.3.0",
       "AutoMapper >= 11.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
+      "FinancialControl.Core >= 1.0.0",
+      "FinancialControl.Core.Shared >= 1.0.0",
+      "FinancialControl.Manager >= 1.0.0",
       "FluentValidation >= 11.2.0",
       "FluentValidation.DependencyInjectionExtensions >= 11.2.0",
       "Microsoft.EntityFrameworkCore >= 6.0.8",
@@ -8885,9 +8967,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.csproj",
-      "projectName": "FinancialControl",
-      "projectPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.csproj",
+      "projectUniqueName": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.WebApi.csproj",
+      "projectName": "FinancialControl.WebApi",
+      "projectPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\FinancialControl.WebApi.csproj",
       "packagesPath": "C:\\Users\\DevPC\\.nuget\\packages\\",
       "outputPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl\\obj\\",
       "projectStyle": "PackageReference",
@@ -8908,7 +8990,17 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Core.Shared\\FinancialControl.Core.Shared.csproj": {
+              "projectPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Core.Shared\\FinancialControl.Core.Shared.csproj"
+            },
+            "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Core\\FinancialControl.Core.csproj": {
+              "projectPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Core\\FinancialControl.Core.csproj"
+            },
+            "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Manager\\FinancialControl.Manager.csproj": {
+              "projectPath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinancialControl.Manager\\FinancialControl.Manager.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

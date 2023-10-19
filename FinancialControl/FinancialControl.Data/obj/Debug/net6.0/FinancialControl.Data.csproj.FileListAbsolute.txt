@@ -1,0 +1,15 @@
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\bin\Debug\net6.0\FinancialControl.Data.deps.json
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\bin\Debug\net6.0\FinancialControl.Data.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\bin\Debug\net6.0\FinancialControl.Data.pdb
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\bin\Debug\net6.0\FinancialControl.Core.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\bin\Debug\net6.0\FinancialControl.Core.pdb
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.csproj.AssemblyReference.cache
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.AssemblyInfoInputs.cache
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.AssemblyInfo.cs
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.csproj.CoreCompileInputs.cache
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.csproj.CopyComplete
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\refint\FinancialControl.Data.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\FinancialControl.Data.pdb
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Data\obj\Debug\net6.0\ref\FinancialControl.Data.dll

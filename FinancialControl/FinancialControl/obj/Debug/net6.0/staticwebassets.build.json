@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "9KSHeCC3dyGAH0dhuaSowhXR2CdVbf8cmaQnJQcAj4Q=",
-  "Source": "FinancialControl",
-  "BasePath": "_content/FinancialControl",
+  "Hash": "C1iXCCFQwoj8ao5DEnQ9Y+egyySYxCinWjQ3RV4VZPE=",
+  "Source": "FinancialControl.WebApi",
+  "BasePath": "_content/FinancialControl.WebApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

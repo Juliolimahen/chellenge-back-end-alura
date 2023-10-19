@@ -1,7 +1,8 @@
-using FinancialControl.Context;
-using FinancialControl.Repositories.Interface;
-using FinancialControl.Services;
-using FinancialControl.Services.Interface;
+using FinancialControl.Data.Context;
+using FinancialControl.Data.Repositories;
+using FinancialControl.Data.Repositories.Interface;
+using FinancialControl.Manager.Services;
+using FinancialControl.Manager.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
