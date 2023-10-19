@@ -1,4 +1,5 @@
 ﻿using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Core.Shared.Dtos.Summary;
 
 namespace FinancialControl.Manager.Services.Interface
 {

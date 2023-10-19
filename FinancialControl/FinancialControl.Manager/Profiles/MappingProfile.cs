@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinancialControl.Core.Models;
-using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Core.Shared.Dtos.Expense;
+using FinancialControl.Core.Shared.Dtos.Revenue;
 
 namespace FinancialControl.Manager.Profiles
 {

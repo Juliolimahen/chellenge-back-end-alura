@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FinancialControl.Core.Models;
 using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Core.Shared.Dtos.Revenue;
 using FinancialControl.Data.Repositories.Interface;
 using FinancialControl.Manager.Services.Interface;
 
@@ -22,15 +23,15 @@ public class RevenueService : IRevenueService
         ResponseDto<IEnumerable<RevenueDto>> response = new();
 
         IEnumerable<Revenue> revenues = !string.IsNullOrEmpty(description)
-            ? await _revenueRepository.GetAll(x => x.Description.Contains(description))
-            : await _revenueRepository.GetAll();
+            ? await _revenueRepository.GetAllAsync(x => x.Description.Contains(description))
+            : await _revenueRepository.GetAllAsync();
         response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
         return response;
     }
 
     public async Task<RevenueDto> GetRevenueById(int id)
     {
-        var revenueEntity = await _revenueRepository.GetById(id);
+        var revenueEntity = await _revenueRepository.GetByIdAsync(id);
         return _mapper.Map<RevenueDto>(revenueEntity);
     }
 
@@ -52,7 +53,7 @@ public class RevenueService : IRevenueService
         #endregion
 
         var revenueEntity = _mapper.Map<Revenue>(revenueDto);
-        await _revenueRepository.Create(revenueEntity);
+        await _revenueRepository.CreateAsync(revenueEntity);
         response.Data = _mapper.Map<RevenueDto>(revenueEntity);
         //revenueDto.Id = revenueEntity.Id;
         return response;
@@ -76,21 +77,21 @@ public class RevenueService : IRevenueService
         #endregion
 
         var revenueEntity = _mapper.Map<Revenue>(revenueDto);
-        await _revenueRepository.Update(revenueEntity);
+        await _revenueRepository.UpdateAsync(revenueEntity);
         return response;
     }
 
     public async Task DeleteRevenue(int id)
     {
-        var revenueEntity = _revenueRepository.GetById(id).Result;
-        await _revenueRepository.Delete(revenueEntity.Id);
+        var revenueEntity = _revenueRepository.GetByIdAsync(id).Result;
+        await _revenueRepository.DeleteAsync(revenueEntity.Id);
     }
 
     public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDate(string year, string month)
     {
         ResponseDto<IEnumerable<RevenueDto>> response = new();
 
-        var revenues = await _revenueRepository.GetAll(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
+        var revenues = await _revenueRepository.GetAllAsync(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
 
         if (!revenues.Any())
         {

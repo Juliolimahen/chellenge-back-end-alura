@@ -5,9 +5,8 @@ namespace FinancialControl.Core.Models;
 /// <summary>
 /// Classe responsável por modelar as receitas
 /// </summary>
-public class Revenue
+public class Revenue : Entity
 {
-    public int Id { get; set; }
     public string? Description { get; set; }
     public double Value { get; set; }
     public DateTime Date { get; set; }

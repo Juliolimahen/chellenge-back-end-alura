@@ -1,0 +1,6 @@
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.csproj.AssemblyReference.cache
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.AssemblyInfoInputs.cache
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.AssemblyInfo.cs
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.csproj.CoreCompileInputs.cache
