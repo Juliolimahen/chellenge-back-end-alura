@@ -5,10 +5,10 @@ namespace FinancialControl.Manager.Services.Interface;
 
 public interface IExpenseService
 {
-    Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenses(string? description);
-    Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDate(string year, string month);
-    Task<ExpenseDto> GetExpenseById(int id);
-    Task<ResponseDto<ExpenseDto>> CreateExpense(CreateExpenseDto expenseDto);
-    Task<ResponseDto<ExpenseDto>> UpdateExpense(ExpenseDto expenseDto);
-    Task DeleteExpense(int id);
+    Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpensesAsync(string? description);
+    Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDateAsync(string year, string month);
+    Task<ExpenseDto> GetExpenseByIdAsync(int id);
+    Task<ResponseDto<ExpenseDto>> CreateExpenseAsync(CreateExpenseDto expenseDto);
+    Task<ResponseDto<ExpenseDto>> UpdateExpenseAsync(ExpenseDto expenseDto);
+    Task DeleteExpenseAsync(int id);
 }

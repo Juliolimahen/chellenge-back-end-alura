@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinancialControl.Core.Shared\FinancialControl.Core.Shared.csproj" />
+    <ProjectReference Include="..\FinancialControl.Core\FinancialControl.Core.csproj" />
+  </ItemGroup>
+
 </Project>

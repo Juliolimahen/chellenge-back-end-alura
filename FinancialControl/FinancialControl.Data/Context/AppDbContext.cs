@@ -32,7 +32,7 @@ public class AppDbContext : DbContext
             Id = 1,
             Description = "Salário",
             Value = 3000,
-            Date = new DateTime(),
+            Date = DateTime.Now,
         });
 
         modelBuilder.Entity<Revenue>().HasData(new Revenue
@@ -40,7 +40,7 @@ public class AppDbContext : DbContext
             Id = 2,
             Description = "Salário bônus",
             Value = 3000,
-            Date = new DateTime(),
+            Date = DateTime.Now,
         });
 
         modelBuilder.Entity<Expense>().HasData(new Expense
@@ -48,7 +48,7 @@ public class AppDbContext : DbContext
             Id = 1,
             Description = "Mensalidade facul",
             Value = 700,
-            Date = new DateTime(),
+            Date = DateTime.Now,
         });
 
         modelBuilder.Entity<Expense>().HasData(new Expense
@@ -56,7 +56,7 @@ public class AppDbContext : DbContext
             Id = 2,
             Description = "Internet",
             Value = 70,
-            Date = new DateTime(),
+            Date = DateTime.Now,
         });
     }
 }

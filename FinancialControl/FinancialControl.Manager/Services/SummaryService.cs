@@ -32,13 +32,13 @@ public class SummaryService : ISummaryService
 
         var totalRevenueMonth = receitas.Sum(x => x.Value);
         var totalExpenseMonth = despesas.Sum(x => x.Value);
-        var categoryAmount = despesas.GroupBy(x => x.Category).Select(x => new ValueCategoryDto { Category = x.Key, Value = Math.Round(x.Sum(s => s.Value)) });
+        var categoryAmount = despesas.GroupBy(x => x.Category).Select(x => new ValueCategoryDto { Category = x.Key, Value = (double)Math.Round(x.Sum(s => s.Value)) });
 
         response.Data = new SummaryDto
         {
-            TotalRevenueMonth = Math.Round(totalRevenueMonth, 2),
-            TotalExpenseMonth = Math.Round(totalExpenseMonth, 2),
-            EndingBalanceMonth = Math.Round(totalRevenueMonth - totalExpenseMonth, 2),
+            TotalRevenueMonth = (double)Math.Round(totalRevenueMonth, 2),
+            TotalExpenseMonth = (double)Math.Round(totalExpenseMonth, 2),
+            EndingBalanceMonth = (double)Math.Round(totalRevenueMonth - totalExpenseMonth, 2),
             EndingBalanceMonthCategory = categoryAmount
         };
 

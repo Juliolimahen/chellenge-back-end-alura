@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MkjLM9/z3hq9+Xi0NyPVe6PYPzK9SK6KplaMPjXQ1ZjNhGNwCOsrhZ6zhqhrHh5kXBXhaMFdkufXbCCisKWyIw==",
+  "dgSpecHash": "7G9gp6++S7fu4i7cVyxPI+lYYBaPDfGFEpJMr0HZLeihodelj6Biyh6AFNSuWIZpsAi7QkReBtnbcqJMBS2IHw==",
   "success": true,
   "projectFilePath": "C:\\ws-projetos\\chellenge-back-end-alura\\FinancialControl\\FinacialControl.WebApi.Tests\\FinacialControl.WebApi.Tests.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\DevPC\\.nuget\\packages\\castle.loggingfacility\\5.1.1\\castle.loggingfacility.5.1.1.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\castle.windsor\\5.1.1\\castle.windsor.5.1.1.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
+    "C:\\Users\\DevPC\\.nuget\\packages\\fluentassertions\\6.12.0\\fluentassertions.6.12.0.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\fluentvalidation\\11.2.0\\fluentvalidation.11.2.0.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.0\\fluentvalidation.dependencyinjectionextensions.11.2.0.nupkg.sha512",
     "C:\\Users\\DevPC\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",

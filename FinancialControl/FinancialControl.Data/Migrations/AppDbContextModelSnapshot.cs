@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinancialControl.Migrations
+namespace FinancialControl.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace FinancialControl.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("FinancialControl.Models.Expense", b =>
+            modelBuilder.Entity("FinancialControl.Core.Models.Expense", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,9 +41,9 @@ namespace FinancialControl.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<double>("Value")
+                    b.Property<decimal>("Value")
                         .HasPrecision(20, 2)
-                        .HasColumnType("float(20)");
+                        .HasColumnType("decimal(20,2)");
 
                     b.HasKey("Id");
 
@@ -54,21 +54,21 @@ namespace FinancialControl.Migrations
                         {
                             Id = 1,
                             Category = 0,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2156),
                             Description = "Mensalidade facul",
-                            Value = 700.0
+                            Value = 700m
                         },
                         new
                         {
                             Id = 2,
                             Category = 0,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2614),
                             Description = "Internet",
-                            Value = 70.0
+                            Value = 70m
                         });
                 });
 
-            modelBuilder.Entity("FinancialControl.Models.Revenue", b =>
+            modelBuilder.Entity("FinancialControl.Core.Models.Revenue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,9 +84,9 @@ namespace FinancialControl.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<double>("Value")
+                    b.Property<decimal>("Value")
                         .HasPrecision(20, 2)
-                        .HasColumnType("float(20)");
+                        .HasColumnType("decimal(20,2)");
 
                     b.HasKey("Id");
 
@@ -96,16 +96,16 @@ namespace FinancialControl.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2058),
                             Description = "Salário",
-                            Value = 3000.0
+                            Value = 3000m
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2128),
                             Description = "Salário bônus",
-                            Value = 3000.0
+                            Value = 3000m
                         });
                 });
 #pragma warning restore 612, 618

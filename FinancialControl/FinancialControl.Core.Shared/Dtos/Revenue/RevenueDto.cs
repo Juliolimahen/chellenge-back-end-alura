@@ -12,7 +12,7 @@ public class RevenueDto
     public string? Description { get; set; }
 
     [Required(ErrorMessage = "The Value is Required")]
-    public double Value { get; set; }
+    public decimal Value { get; set; }
 
     [Required(ErrorMessage = "The Date is Required")]
     public DateTime Date { get; set; }

@@ -11,15 +11,4 @@ public class Expense : Entity
     public decimal Value { get; set; }
     public DateTime Date { get; set; }
     public Category Category { get; set; }
-
-    public Expense(int id, string description, decimal value, DateTime date)
-    {
-        Id = id;
-        Description = description;
-        Value = value;
-        Date = date;
-        Category = Category;
-    }
-
-    public Expense() { }
 }

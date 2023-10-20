@@ -28,25 +28,19 @@ namespace FinancialControl.Core.Shared.Dtos.Expense
             Category = category;
         }
 
-        public ExpenseDto(int id)
-        {
-            Id = id;
-        }
-
         public ExpenseDto()
         {
-
-        }
-
-        public ExpenseDto CloneTipado()
-        {
-            return (ExpenseDto)Clone();
         }
 
         public object Clone()
         {
             var expense = (ExpenseDto)MemberwiseClone();
             return expense;
+        }
+
+        public ExpenseDto CloneTipado()
+        {
+            return (ExpenseDto)Clone();
         }
     }
 }

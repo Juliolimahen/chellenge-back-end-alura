@@ -18,7 +18,7 @@ public class RevenueService : IRevenueService
         _mapper = mapper;
     }
 
-    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenues(string? description)
+    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenuesAsync(string? description)
     {
         ResponseDto<IEnumerable<RevenueDto>> response = new();
 
@@ -29,13 +29,13 @@ public class RevenueService : IRevenueService
         return response;
     }
 
-    public async Task<RevenueDto> GetRevenueById(int id)
+    public async Task<RevenueDto> GetRevenueByIdAsync(int id)
     {
         var revenueEntity = await _revenueRepository.GetByIdAsync(id);
         return _mapper.Map<RevenueDto>(revenueEntity);
     }
 
-    public async Task<ResponseDto<RevenueDto>> CreateRevenue(CreateRevenueDto revenueDto)
+    public async Task<ResponseDto<RevenueDto>> CreateRevenueAsync(CreateRevenueDto revenueDto)
     {
         ResponseDto<RevenueDto> response = new();
         #region Query validation month
@@ -55,11 +55,11 @@ public class RevenueService : IRevenueService
         var revenueEntity = _mapper.Map<Revenue>(revenueDto);
         await _revenueRepository.CreateAsync(revenueEntity);
         response.Data = _mapper.Map<RevenueDto>(revenueEntity);
-        //revenueDto.Id = revenueEntity.Id;
+        revenueDto.Id = revenueEntity.Id;
         return response;
     }
 
-    public async Task<ResponseDto<RevenueDto>> UpdateRevenue(RevenueDto revenueDto)
+    public async Task<ResponseDto<RevenueDto>> UpdateRevenueAsync(RevenueDto revenueDto)
     {
         ResponseDto<RevenueDto> response = new();
         #region Query validation month
@@ -81,13 +81,13 @@ public class RevenueService : IRevenueService
         return response;
     }
 
-    public async Task DeleteRevenue(int id)
+    public async Task DeleteRevenueAsync(int id)
     {
         var revenueEntity = _revenueRepository.GetByIdAsync(id).Result;
         await _revenueRepository.DeleteAsync(revenueEntity.Id);
     }
 
-    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDate(string year, string month)
+    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDateAsync(string year, string month)
     {
         ResponseDto<IEnumerable<RevenueDto>> response = new();
 

@@ -18,7 +18,7 @@ public class ExpenseService : IExpenseService
         _mapper = mapper;
     }
 
-    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenses(string? description)
+    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpensesAsync(string? description)
     {
         ResponseDto<IEnumerable<ExpenseDto>> response = new();
 
@@ -34,13 +34,13 @@ public class ExpenseService : IExpenseService
         return response;
     }
 
-    public async Task<ExpenseDto> GetExpenseById(int id)
+    public async Task<ExpenseDto> GetExpenseByIdAsync(int id)
     {
         var expenseEntity = await _expenseRepository.GetByIdAsync(id);
         return _mapper.Map<ExpenseDto>(expenseEntity);
     }
 
-    public async Task<ResponseDto<ExpenseDto>> CreateExpense(ExpenseDto expenseDto)
+    public async Task<ResponseDto<ExpenseDto>> CreateExpenseAsync(CreateExpenseDto expenseDto)
     {
         ResponseDto<ExpenseDto> response = new();
         #region Query validation month
@@ -58,12 +58,12 @@ public class ExpenseService : IExpenseService
         #endregion
 
         var expenseEntity = _mapper.Map<Expense>(expenseDto);
-        await _expenseRepository.CreateAsync(expenseEntity);
+        var expense = await _expenseRepository.CreateAsync(expenseEntity);
         expenseDto.Id = expenseEntity.Id;
         return response;
     }
 
-    public async Task<ResponseDto<ExpenseDto>> UpdateExpense(ExpenseDto expenseDto)
+    public async Task<ResponseDto<ExpenseDto>> UpdateExpenseAsync(ExpenseDto expenseDto)
     {
         ResponseDto<ExpenseDto> response = new();
         #region Query validation month
@@ -85,13 +85,13 @@ public class ExpenseService : IExpenseService
         return response;
     }
 
-    public async Task DeleteExpense(int id)
+    public async Task DeleteExpenseAsync(int id)
     {
         var expenseEntity = _expenseRepository.GetByIdAsync(id).Result;
         await _expenseRepository.DeleteAsync(expenseEntity.Id);
     }
 
-    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDate(string year, string month)
+    public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDateAsync(string year, string month)
     {
         ResponseDto<IEnumerable<ExpenseDto>> response = new();
 

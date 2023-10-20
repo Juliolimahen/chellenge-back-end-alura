@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "FinancialControl.Manager/1.0.0": {
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "FinancialControl.Core.Shared": "1.0.0",
           "FinancialControl.Data": "1.0.0"
         },

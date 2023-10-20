@@ -13,7 +13,7 @@ namespace FinancialControl.Core.Shared.Dtos.Revenue
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "The Value is Required")]
-        public double Value { get; set; }
+        public decimal Value { get; set; }
 
         [Required(ErrorMessage = "The Date is Required")]
         public DateTime Date { get; set; }
@@ -22,7 +22,7 @@ namespace FinancialControl.Core.Shared.Dtos.Revenue
         {
         }
 
-        public CreateRevenueDto(int id, string? description, double value, DateTime date)
+        public CreateRevenueDto(int id, string? description, decimal value, DateTime date)
         {
             Id = id;
             Description = description;
