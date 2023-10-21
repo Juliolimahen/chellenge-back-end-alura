@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinancialControl.FakeData.ExpenseData;
 
-public class UpdateExpenseDtoFaker: Faker<UpdateExpenseDto>
+public class UpdateExpenseDtoFaker : Faker<UpdateExpenseDto>
 {
 	public UpdateExpenseDtoFaker()
 	{

@@ -1,4 +1,6 @@
-﻿using FinancialControl.Core.Shared.Dtos.Revenue;
+﻿using FinancialControl.Core.Models;
+using FinancialControl.Core.Shared.Dtos.Revenue;
+using FinancialControl.Manager.Services;
 using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,18 +72,19 @@ public class RevenueController : ControllerBase
     {
         var revenueDto = await _revenueService.GetRevenueByIdAsync(id);
         if (revenueDto is null)
-        {
             return NotFound("Revenue not found");
-        }
 
         await _revenueService.DeleteRevenueAsync(id);
         return Ok(revenueDto);
     }
 
     [HttpGet("{year}/{month}")]
-    public async Task<ActionResult<IEnumerable<RevenueDto>>> GetAllExpenseByDate([FromRoute] string year, [FromRoute] string month)
+    public async Task<IActionResult> GetAllRevenueByDate([FromRoute] string year, [FromRoute] string month)
     {
         var revenues = await _revenueService.GetRevenueByDateAsync(year, month);
+        if (revenues is null)
+            return NotFound("Revenue not found for this date.");
+
         return Ok(revenues);
     }
 }

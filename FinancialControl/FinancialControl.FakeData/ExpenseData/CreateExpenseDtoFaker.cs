@@ -3,7 +3,7 @@ using FinancialControl.Core.Shared.Dtos.Expense;
 
 namespace FinancialControl.FakeData.ExpenseData;
 
-public class CreateExpenseDtoFaker: Faker<CreateExpenseDto>
+public class CreateExpenseDtoFaker : Faker<CreateExpenseDto>
 {
     public CreateExpenseDtoFaker()
     {

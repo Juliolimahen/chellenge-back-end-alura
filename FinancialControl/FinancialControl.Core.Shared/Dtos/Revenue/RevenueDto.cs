@@ -2,8 +2,25 @@
 
 namespace FinancialControl.Core.Shared.Dtos.Revenue;
 
-public class RevenueDto
+public class RevenueDto : ICloneable
 {
+    public RevenueDto(int id, string? description, decimal value, DateTime date)
+    {
+        Id = id;
+        Description = description;
+        Value = value;
+        Date = date;
+    }
+
+    public RevenueDto(){}
+
+    public RevenueDto(string? description, decimal value, DateTime date)
+    {
+        Description = description;
+        Value = value;
+        Date = date;
+    }
+
     public int Id { get; set; }
 
     [Required(ErrorMessage = "The Description is Required")]
@@ -16,4 +33,15 @@ public class RevenueDto
 
     [Required(ErrorMessage = "The Date is Required")]
     public DateTime Date { get; set; }
+
+    public object Clone()
+    {
+        var expense = (RevenueDto)MemberwiseClone();
+        return expense;
+    }
+
+    public RevenueDto CloneTipado()
+    {
+        return (RevenueDto)Clone();
+    }
 }

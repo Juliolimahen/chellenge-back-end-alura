@@ -1,6 +1,5 @@
-﻿namespace FinancialControl.Core.Shared.Dtos.Expense
+﻿namespace FinancialControl.Core.Shared.Dtos.Expense;
+
+public class UpdateExpenseDto : ExpenseDto
 {
-    public class UpdateExpenseDto : ExpenseDto
-    {
-    }
 }

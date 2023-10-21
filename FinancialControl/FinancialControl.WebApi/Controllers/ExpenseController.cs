@@ -1,4 +1,5 @@
-﻿using FinancialControl.Core.Shared.Dtos.Expense;
+﻿using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Core.Shared.Dtos.Expense;
 using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +18,11 @@ public class ExpenseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] string? description)
+    public async Task<ActionResult<ResponseDto<ExpenseDto>>> GetAll([FromQuery] string? description)
     {
         var expenses = await _expenseService.GetExpensesAsync(description);
-        if (expenses is null)
-            return NotFound("Expenses not found for this Id.");
+        if (expenses is null || !expenses.Data.Any())
+            return NotFound(expenses == null ? "Expenses not found for this Id." : "Expenses not found for this description.");
 
         return Ok(expenses);
     }
@@ -37,13 +38,15 @@ public class ExpenseController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateExpenseDto expenseDto)
+    public async Task<ActionResult<ResponseDto<ExpenseDto>>> Create([FromBody] CreateExpenseDto expenseDto)
     {
-        if (expenseDto is null) { return BadRequest("Invalid Data"); }
+        if (expenseDto is null)
+            return BadRequest("Invalid revenue data. Please provide valid data.");
 
         var expense = await _expenseService.CreateExpenseAsync(expenseDto);
 
-        if (!expense.Success) { return BadRequest(expense); }
+        if (!expense.Success)
+            return BadRequest(expense);
 
         return CreatedAtAction(nameof(GetById), new { id = expenseDto.Id }, expenseDto);
     }
@@ -79,7 +82,7 @@ public class ExpenseController : ControllerBase
     {
         var expenses = await _expenseService.GetExpenseByDateAsync(year, month);
         if (expenses is null)
-            return NotFound("Expense not found for this date");
+            return NotFound("Expense not found for this date.");
 
         return Ok(expenses);
     }

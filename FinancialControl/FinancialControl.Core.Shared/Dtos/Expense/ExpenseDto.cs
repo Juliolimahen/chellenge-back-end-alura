@@ -27,10 +27,15 @@ namespace FinancialControl.Core.Shared.Dtos.Expense
             Date = date;
             Category = category;
         }
-
-        public ExpenseDto()
+        public ExpenseDto(string? description, decimal value, DateTime date, Category? category)
         {
+            Description = description;
+            Value = value;
+            Date = date;
+            Category = category;
         }
+
+        public ExpenseDto() { }
 
         public object Clone()
         {
