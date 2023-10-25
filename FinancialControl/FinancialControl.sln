@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialControl.WebApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinacialControl.WebApi.Tests", "FinacialControl.WebApi.Tests\FinacialControl.WebApi.Tests.csproj", "{A866CE5A-34F7-44C1-BB4D-C29FFBBBA20D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialControl.FakeData", "FinancialControl.FakeData\FinancialControl.FakeData.csproj", "{6B34EDEF-E8ED-4163-B2F7-88429F4253B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialControl.FakeData", "FinancialControl.FakeData\FinancialControl.FakeData.csproj", "{6B34EDEF-E8ED-4163-B2F7-88429F4253B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -20,90 +20,85 @@ public class ExpenseService : IExpenseService
 
     public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpensesAsync(string? description)
     {
-        ResponseDto<IEnumerable<ExpenseDto>> response = new();
+        var expenses = !string.IsNullOrEmpty(description)
+            ? await _expenseRepository.GetAllAsync(x => x.Description.Contains(description))
+            : await _expenseRepository.GetAllAsync();
 
-        IEnumerable<Expense> expenses;
-
-        if (!string.IsNullOrEmpty(description))
-            expenses = await _expenseRepository.GetAllAsync(x => x.Description.Contains(description));
-        else
-            expenses = await _expenseRepository.GetAllAsync();
-
-        response.Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
-
-        return response;
+        return new ResponseDto<IEnumerable<ExpenseDto>>
+        {
+            Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses)
+        };
     }
 
-    public async Task<ExpenseDto> GetExpenseByIdAsync(int id)
+    public async Task<ResponseDto<ExpenseDto>> GetExpenseByIdAsync(int id)
     {
         var expenseEntity = await _expenseRepository.GetByIdAsync(id);
-        return _mapper.Map<ExpenseDto>(expenseEntity);
+        return _mapper.Map<ResponseDto<ExpenseDto>>(expenseEntity);
     }
 
     public async Task<ResponseDto<ExpenseDto>> CreateExpenseAsync(CreateExpenseDto expenseDto)
     {
-        ResponseDto<ExpenseDto> response = new();
-        #region Query validation month
-        var exists = await _expenseRepository.FirstOrDefaultAsync(
-            x => x.Description == expenseDto.Description
+        var existingExpense = await _expenseRepository.FirstOrDefaultAsync(x =>
+            x.Description == expenseDto.Description
             && x.Date.Month == expenseDto.Date.Month
             && x.Date.Year == expenseDto.Date.Year);
 
-        if (exists is not null)
+        if (existingExpense != null)
         {
-            response.Success = false;
-            response.Erros.Add($"there is already an expense with the description {expenseDto.Description} for the date {expenseDto.Date.Month}/{expenseDto.Date.Year}");
-            return response;
+            return new ResponseDto<ExpenseDto>
+            {
+                Success = false,
+                Erros = new List<string>
+                {
+                    $"There is already an expense with the description {expenseDto.Description} for the date {expenseDto.Date.Month}/{expenseDto.Date.Year}"
+                }
+            };
         }
-        #endregion
 
         var expenseEntity = _mapper.Map<Expense>(expenseDto);
         var expense = await _expenseRepository.CreateAsync(expenseEntity);
         expenseDto.Id = expenseEntity.Id;
-        return response;
+        return new ResponseDto<ExpenseDto>();
     }
 
     public async Task<ResponseDto<ExpenseDto>> UpdateExpenseAsync(ExpenseDto expenseDto)
     {
-        ResponseDto<ExpenseDto> response = new();
-        #region Query validation month
-        var exists = await _expenseRepository.FirstOrDefaultAsync(
-            x => x.Description == expenseDto.Description
+        var existingExpense = await _expenseRepository.FirstOrDefaultAsync(x =>
+            x.Description == expenseDto.Description
             && x.Date.Month == expenseDto.Date.Month
             && x.Date.Year == expenseDto.Date.Year);
 
-        if (exists is not null)
+        if (existingExpense != null)
         {
-            response.Success = false;
-            response.Erros.Add($"there is already an expense with the description {expenseDto.Description} for the date {expenseDto.Date.Month}/{expenseDto.Date.Year}");
-            return response;
+            return new ResponseDto<ExpenseDto>
+            {
+                Success = false,
+                Erros = new List<string>
+                {
+                    $"There is already an expense with the description {expenseDto.Description} for the date {expenseDto.Date.Month}/{expenseDto.Date.Year}"
+                }
+            };
         }
-        #endregion
 
         var expenseEntity = _mapper.Map<Expense>(expenseDto);
         await _expenseRepository.UpdateAsync(expenseEntity);
-        return response;
+        return new ResponseDto<ExpenseDto>();
     }
 
     public async Task DeleteExpenseAsync(int id)
     {
-        var expenseEntity = _expenseRepository.GetByIdAsync(id).Result;
+        var expenseEntity = await _expenseRepository.GetByIdAsync(id);
         await _expenseRepository.DeleteAsync(expenseEntity.Id);
     }
 
     public async Task<ResponseDto<IEnumerable<ExpenseDto>>> GetExpenseByDateAsync(string year, string month)
     {
-        ResponseDto<IEnumerable<ExpenseDto>> response = new();
+        var expenses = await _expenseRepository.GetAllAsync(x =>
+            x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
 
-        var expenses = await _expenseRepository.GetAllAsync(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
-        if (!expenses.Any())
+        return new ResponseDto<IEnumerable<ExpenseDto>>
         {
-            response.Success = false;
-            response.Erros.Add($"No expenses found on this date {month}/{year}");
-            return response;
-        }
-
-        response.Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
-        return response;
+            Data = _mapper.Map<IEnumerable<ExpenseDto>>(expenses)
+        };
     }
 }

@@ -31,6 +31,12 @@ builder.Services.AddScoped<ISummaryService, SummaryService>();
 
 
 var app = builder.Build();
+app.UseExceptionHandler("/error");
+app.UseExceptionHandler("/404");
+app.UseExceptionHandler("/500");
+
+
+app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

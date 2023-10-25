@@ -5,102 +5,104 @@ using FinancialControl.Core.Shared.Dtos.Revenue;
 using FinancialControl.Data.Repositories.Interface;
 using FinancialControl.Manager.Services.Interface;
 
-namespace FinancialControl.Manager.Services;
-
-public class RevenueService : IRevenueService
+namespace FinancialControl.Manager.Services
 {
-    private readonly IRevenueRepository _revenueRepository;
-    private readonly IMapper _mapper;
-
-    public RevenueService(IRevenueRepository revenueRepository, IMapper mapper)
+    public class RevenueService : IRevenueService
     {
-        _revenueRepository = revenueRepository;
-        _mapper = mapper;
-    }
+        private readonly IRevenueRepository _revenueRepository;
+        private readonly IMapper _mapper;
 
-    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenuesAsync(string? description)
-    {
-        ResponseDto<IEnumerable<RevenueDto>> response = new();
-
-        IEnumerable<Revenue> revenues = !string.IsNullOrEmpty(description)
-            ? await _revenueRepository.GetAllAsync(x => x.Description.Contains(description))
-            : await _revenueRepository.GetAllAsync();
-        response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
-        return response;
-    }
-
-    public async Task<RevenueDto> GetRevenueByIdAsync(int id)
-    {
-        var revenueEntity = await _revenueRepository.GetByIdAsync(id);
-        return _mapper.Map<RevenueDto>(revenueEntity);
-    }
-
-    public async Task<ResponseDto<RevenueDto>> CreateRevenueAsync(CreateRevenueDto revenueDto)
-    {
-        ResponseDto<RevenueDto> response = new();
-        #region Query validation month
-        var exists = await _revenueRepository.FirstOrDefaultAsync(
-            x => x.Description == revenueDto.Description
-            && x.Date.Month == revenueDto.Date.Month
-            && x.Date.Year == revenueDto.Date.Year);
-
-        if (exists is not null)
+        public RevenueService(IRevenueRepository revenueRepository, IMapper mapper)
         {
-            response.Success = false;
-            response.Erros.Add($"there is already an expense with the description {revenueDto.Description} for the date {revenueDto.Date.Month}/{revenueDto.Date.Year}");
-            return response;
+            _revenueRepository = revenueRepository;
+            _mapper = mapper;
         }
-        #endregion
 
-        var revenueEntity = _mapper.Map<Revenue>(revenueDto);
-        await _revenueRepository.CreateAsync(revenueEntity);
-        response.Data = _mapper.Map<RevenueDto>(revenueEntity);
-        revenueDto.Id = revenueEntity.Id;
-        return response;
-    }
-
-    public async Task<ResponseDto<RevenueDto>> UpdateRevenueAsync(RevenueDto revenueDto)
-    {
-        ResponseDto<RevenueDto> response = new();
-        #region Query validation month
-        var exists = await _revenueRepository.FirstOrDefaultAsync(
-            x => x.Description == revenueDto.Description
-            && x.Date.Month == revenueDto.Date.Month
-            && x.Date.Year == revenueDto.Date.Year);
-
-        if (exists is not null)
+        public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenuesAsync(string? description)
         {
-            response.Success = false;
-            response.Erros.Add($"there is already an expense with the description {revenueDto.Description} for the date {revenueDto.Date.Month}/{revenueDto.Date.Year}");
-            return response;
-        }
-        #endregion
+            var response = new ResponseDto<IEnumerable<RevenueDto>>();
 
-        var revenueEntity = _mapper.Map<Revenue>(revenueDto);
-        await _revenueRepository.UpdateAsync(revenueEntity);
-        return response;
-    }
+            IEnumerable<Revenue> revenues = string.IsNullOrEmpty(description)
+                ? await _revenueRepository.GetAllAsync()
+                : await _revenueRepository.GetAllAsync(x => x.Description.Contains(description));
 
-    public async Task DeleteRevenueAsync(int id)
-    {
-        var revenueEntity = _revenueRepository.GetByIdAsync(id).Result;
-        await _revenueRepository.DeleteAsync(revenueEntity.Id);
-    }
-
-    public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDateAsync(string year, string month)
-    {
-        ResponseDto<IEnumerable<RevenueDto>> response = new();
-
-        var revenues = await _revenueRepository.GetAllAsync(x => x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
-
-        if (!revenues.Any())
-        {
-            response.Success = false;
-            response.Erros.Add($"No expenses found on this date {month}/{year}");
+            response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
             return response;
         }
 
-        response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
-        return response;
+        public async Task<ResponseDto<RevenueDto>> GetRevenueByIdAsync(int id)
+        {
+            var revenueEntity = await _revenueRepository.GetByIdAsync(id);
+            return _mapper.Map<ResponseDto<RevenueDto>>(revenueEntity);
+        }
+
+        public async Task<ResponseDto<RevenueDto>> CreateRevenueAsync(CreateRevenueDto revenueDto)
+        {
+            var response = new ResponseDto<RevenueDto>();
+
+            var exists = await _revenueRepository.FirstOrDefaultAsync(
+                x => x.Description == revenueDto.Description
+                && x.Date.Month == revenueDto.Date.Month
+                && x.Date.Year == revenueDto.Date.Year);
+
+            if (exists != null)
+            {
+                response.Success = false;
+                response.Erros.Add($"There is already a revenue with the description {revenueDto.Description} for the date {revenueDto.Date.Month}/{revenueDto.Date.Year}");
+                return response;
+            }
+
+            var revenueEntity = _mapper.Map<Revenue>(revenueDto);
+            await _revenueRepository.CreateAsync(revenueEntity);
+            response.Data = _mapper.Map<RevenueDto>(revenueEntity);
+            return response;
+        }
+
+        public async Task<ResponseDto<RevenueDto>> UpdateRevenueAsync(RevenueDto revenueDto)
+        {
+            var response = new ResponseDto<RevenueDto>();
+
+            var exists = await _revenueRepository.FirstOrDefaultAsync(
+                x => x.Description == revenueDto.Description
+                && x.Date.Month == revenueDto.Date.Month
+                && x.Date.Year == revenueDto.Date.Year);
+
+            if (exists != null)
+            {
+                response.Success = false;
+                response.Erros.Add($"There is already a revenue with the description {revenueDto.Description} for the date {revenueDto.Date.Month}/{revenueDto.Date.Year}");
+                return response;
+            }
+
+            var revenueEntity = _mapper.Map<Revenue>(revenueDto);
+            await _revenueRepository.UpdateAsync(revenueEntity);
+            return response;
+        }
+
+        public async Task DeleteRevenueAsync(int id)
+        {
+            var revenueEntity = await _revenueRepository.GetByIdAsync(id);
+            await _revenueRepository.DeleteAsync(revenueEntity.Id);
+        }
+
+        public async Task<ResponseDto<IEnumerable<RevenueDto>>> GetRevenueByDateAsync(string year, string month)
+        {
+            var response = new ResponseDto<IEnumerable<RevenueDto>>();
+
+            var revenues = await _revenueRepository.GetAllAsync(x =>
+                x.Date.Year.ToString() == year && x.Date.Month.ToString() == month);
+
+            if (!revenues.Any())
+            {
+                response.Success = false;
+                response.Erros.Add($"No revenues found on this date {month}/{year}");
+            }
+            else
+            {
+                response.Data = _mapper.Map<IEnumerable<RevenueDto>>(revenues);
+            }
+
+            return response;
+        }
     }
 }

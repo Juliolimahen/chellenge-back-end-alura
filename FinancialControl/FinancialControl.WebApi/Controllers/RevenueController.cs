@@ -1,6 +1,6 @@
-﻿using FinancialControl.Core.Models;
+﻿using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Core.Shared.Dtos.Expense;
 using FinancialControl.Core.Shared.Dtos.Revenue;
-using FinancialControl.Manager.Services;
 using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,72 +19,127 @@ public class RevenueController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAll([FromQuery] string? description)
     {
-        var revenuesDto = await _revenueService.GetRevenuesAsync(description);
-        if (revenuesDto is null)
-            return NotFound("Revenues not found for this description");
+        var response = await _revenueService.GetRevenuesAsync(description);
 
-        return Ok(revenuesDto);
+        if (response.Success && response.Data.Any())
+        {
+            return Ok(response);
+        }
+
+        return NotFound(new ResponseDto<IEnumerable<RevenueDto>>
+        {
+            Success = false,
+            Erros = new List<string> { "No revenues found for this description." }
+        });
     }
 
     [HttpGet("{id:int}", Name = "GetReceita")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
-        var revenueDto = await _revenueService.GetRevenueByIdAsync(id);
-        if (revenueDto is null)
-            return NotFound("Revenue not found for this Id");
+        var response = await _revenueService.GetRevenueByIdAsync(id);
 
-        return Ok(revenueDto);
+        if (response.Success && response.Data != null)
+        {
+            return Ok(response);
+        }
+
+        return NotFound(new ResponseDto<RevenueDto>
+        {
+            Success = false,
+            Erros = new List<string> { "Revenue not found for this Id." }
+        });
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateRevenueDto revenueDto)
     {
-        if (revenueDto is null)
-            return BadRequest("Invalid revenue data. Please provide valid data.");
+        if (revenueDto == null)
+        {
+            return BadRequest(new ResponseDto<RevenueDto>
+            {
+                Success = false,
+                Erros = new List<string> { "Invalid revenue data. Please provide valid data." }
+            });
+        }
 
-        var revenue = await _revenueService.CreateRevenueAsync(revenueDto);
+        var response = await _revenueService.CreateRevenueAsync(revenueDto);
 
-        if (!revenue.Success)
-            return BadRequest(revenue);
+        if (response.Success)
+        {
+            return CreatedAtAction("GetById", new { id = response.Data.Id }, response);
+        }
 
-        return CreatedAtAction(nameof(GetById), new { id = revenueDto.Id }, revenueDto);
+        return BadRequest(response);
     }
 
     [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(int id, [FromBody] RevenueDto revenueDto)
     {
         if (revenueDto == null || id != revenueDto.Id)
-            return BadRequest(revenueDto == null ?
-                "Invalid revenue data. Please provide valid data."
-                : "The provided ID does not match the revenue ID.");
+        {
+            return BadRequest(new ResponseDto<RevenueDto>
+            {
+                Success = false,
+                Erros = new List<string> { "Invalid revenue data. Please provide valid data." }
+            });
+        }
 
-        var updateResult = await _revenueService.UpdateRevenueAsync(revenueDto);
+        var response = await _revenueService.UpdateRevenueAsync(revenueDto);
 
-        return updateResult.Success
-            ? Ok(revenueDto)
-            : BadRequest(updateResult);
+        if (response.Success)
+        {
+            return Ok(response);
+        }
+
+        return BadRequest(response);
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> Delete(int id)
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(int id)
     {
-        var revenueDto = await _revenueService.GetRevenueByIdAsync(id);
-        if (revenueDto is null)
-            return NotFound("Revenue not found");
+        var response = await _revenueService.GetRevenueByIdAsync(id);
 
-        await _revenueService.DeleteRevenueAsync(id);
-        return Ok(revenueDto);
+        if (response.Data != null)
+        {
+            await _revenueService.DeleteRevenueAsync(id);
+            return NoContent();
+        }
+
+        return NotFound(new ResponseDto<ExpenseDto>
+        {
+            Success = false,
+            Erros = new List<string> { "Revenue not found." }
+        });
     }
 
     [HttpGet("{year}/{month}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllRevenueByDate([FromRoute] string year, [FromRoute] string month)
     {
-        var revenues = await _revenueService.GetRevenueByDateAsync(year, month);
-        if (revenues is null)
-            return NotFound("Revenue not found for this date.");
+        var response = await _revenueService.GetRevenueByDateAsync(year, month);
 
-        return Ok(revenues);
+        if (response.Success && response.Data.Any())
+        {
+            return Ok(response);
+        }
+
+        return NotFound(new ResponseDto<IEnumerable<RevenueDto>>
+        {
+            Success = false,
+            Erros = new List<string> { "No revenues found for this date." }
+        });
     }
 }

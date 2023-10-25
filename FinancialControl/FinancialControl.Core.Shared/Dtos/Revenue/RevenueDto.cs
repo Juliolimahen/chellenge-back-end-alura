@@ -36,8 +36,8 @@ public class RevenueDto : ICloneable
 
     public object Clone()
     {
-        var expense = (RevenueDto)MemberwiseClone();
-        return expense;
+        var revenue = (RevenueDto)MemberwiseClone();
+        return revenue;
     }
 
     public RevenueDto CloneTipado()
