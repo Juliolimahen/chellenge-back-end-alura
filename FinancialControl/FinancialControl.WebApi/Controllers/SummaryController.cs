@@ -1,4 +1,5 @@
-﻿using FinancialControl.Manager.Services.Interface;
+﻿using FinancialControl.Core.Shared.Dtos.Summary;
+using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialControl.WebApi.Controllers;
@@ -16,7 +17,9 @@ public class SummaryController : ControllerBase
     }
 
     [HttpGet("{year}/{month}")]
-    public async Task<IActionResult> GetResumoasync([FromRoute] int year, [FromRoute] int month)
+    [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetSummary([FromRoute] int year, [FromRoute] int month)
     {
         return Ok(await _summaryService.GetSummary(year, month));
     }

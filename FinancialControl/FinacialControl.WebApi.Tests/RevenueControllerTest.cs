@@ -1,12 +1,12 @@
-﻿using FinancialControl.Core.Shared.Dtos.Revenue;
-using FinancialControl.Core.Shared.Dtos;
-using FinancialControl.Manager.Services.Interface;
-using FinancialControl.WebApi.Controllers;
+﻿using NSubstitute;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NSubstitute;
-using FluentAssertions;
+using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.WebApi.Controllers;
 using FinancialControl.FakeData.RevenueData;
+using FinancialControl.Manager.Services.Interface;
+using FinancialControl.Core.Shared.Dtos.Revenue;
 
 namespace FinacialControl.WebApi.Tests;
 
@@ -56,7 +56,7 @@ public class RevenueControllerTest
         var okObjectResult = Assert.IsType<OkObjectResult>(result);
         okObjectResult.StatusCode.Should().Be(StatusCodes.Status200OK);
 
-        var responseDto = Assert.IsType<ResponseDto<IEnumerable<RevenueDto>>>(okObjectResult.Value); // Corrigir aqui
+        var responseDto = Assert.IsType<ResponseDto<IEnumerable<RevenueDto>>>(okObjectResult.Value);
         var returnedRevenues = responseDto.Data.ToList();
         returnedRevenues.Should().BeEquivalentTo(_listRevenueDto);
     }
@@ -102,7 +102,7 @@ public class RevenueControllerTest
     {
         // Arrange
         var id = 1; // Define um ID que não existe
-        var updatedRevenueDto = new UpdateRevenueDto(); // Defina um objeto de atualização válido
+        var updatedRevenueDto = new UpdateRevenueDto();
         _manager.UpdateRevenueAsync(Arg.Any<UpdateRevenueDto>()).Returns(new ResponseDto<RevenueDto> { Success = false });
 
         // Act

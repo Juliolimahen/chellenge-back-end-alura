@@ -1,5 +1,4 @@
 ﻿using FinancialControl.Core.Shared.Dtos;
-using FinancialControl.Core.Shared.Dtos.Expense;
 using FinancialControl.Core.Shared.Dtos.Revenue;
 using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +23,8 @@ public class RevenueController : ControllerBase
     /// <param name="description"></param>
     /// <returns></returns>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAll([FromQuery] string? description)
     {
         var response = await _revenueService.GetRevenuesAsync(description);
@@ -48,8 +47,8 @@ public class RevenueController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}", Name = "GetReceita")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var response = await _revenueService.GetRevenueByIdAsync(id);
@@ -72,8 +71,8 @@ public class RevenueController : ControllerBase
     /// <param name="expenseDto"></param>
     /// <returns></returns>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateRevenueDto revenueDto)
     {
         if (revenueDto == null)
@@ -102,8 +101,8 @@ public class RevenueController : ControllerBase
     /// <param name="expenseDto"></param>
     /// <returns></returns>
     [HttpPut("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(int id, [FromBody] RevenueDto revenueDto)
     {
         if (revenueDto == null || id != revenueDto.Id)
@@ -131,8 +130,8 @@ public class RevenueController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
         var response = await _revenueService.GetRevenueByIdAsync(id);
@@ -143,7 +142,7 @@ public class RevenueController : ControllerBase
             return NoContent();
         }
 
-        return NotFound(new ResponseDto<ExpenseDto>
+        return NotFound(new ResponseDto<RevenueDto>
         {
             Success = false,
             Erros = new List<string> { "Revenue not found." }
@@ -157,8 +156,8 @@ public class RevenueController : ControllerBase
     /// <param name="month"></param>
     /// <returns></returns>
     [HttpGet("{year}/{month}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseDto<RevenueDto>), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllRevenueByDate([FromRoute] string year, [FromRoute] string month)
     {
         var response = await _revenueService.GetRevenueByDateAsync(year, month);

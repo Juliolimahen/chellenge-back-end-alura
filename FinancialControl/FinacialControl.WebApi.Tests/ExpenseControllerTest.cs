@@ -1,12 +1,12 @@
-﻿using FinancialControl.Core.Shared.Dtos;
-using FinancialControl.Core.Shared.Dtos.Expense;
-using FinancialControl.FakeData.ExpenseData;
-using FinancialControl.Manager.Services.Interface;
-using FinancialControl.WebApi.Controllers;
+﻿using NSubstitute;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NSubstitute;
+using Microsoft.AspNetCore.Http;
+using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.WebApi.Controllers;
+using FinancialControl.FakeData.ExpenseData;
+using FinancialControl.Core.Shared.Dtos.Expense;
+using FinancialControl.Manager.Services.Interface;
 
 namespace FinacialControl.WebApi.Tests;
 
@@ -56,7 +56,7 @@ public class ExpenseControllerTest
         var okObjectResult = Assert.IsType<OkObjectResult>(result);
         okObjectResult.StatusCode.Should().Be(StatusCodes.Status200OK);
 
-        var responseDto = Assert.IsType<ResponseDto<IEnumerable<ExpenseDto>>>(okObjectResult.Value); // Corrigir aqui
+        var responseDto = Assert.IsType<ResponseDto<IEnumerable<ExpenseDto>>>(okObjectResult.Value);
         var returnedExpenses = responseDto.Data.ToList();
         returnedExpenses.Should().BeEquivalentTo(_listExpenseDto);
     }
@@ -102,7 +102,7 @@ public class ExpenseControllerTest
     {
         // Arrange
         var id = 1; // Define um ID que não existe
-        var updatedExpenseDto = new UpdateExpenseDto(); // Defina um objeto de atualização válido
+        var updatedExpenseDto = new UpdateExpenseDto();
         _manager.UpdateExpenseAsync(Arg.Any<UpdateExpenseDto>()).Returns(new ResponseDto<ExpenseDto> { Success = false });
 
         // Act
