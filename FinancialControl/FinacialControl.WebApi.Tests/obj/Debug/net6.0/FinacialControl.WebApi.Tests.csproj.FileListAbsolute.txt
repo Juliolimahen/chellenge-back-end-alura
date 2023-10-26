@@ -174,3 +174,9 @@ C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.pdb
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\FinacialControl.WebApi.Tests.genruntimeconfig.cache
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\obj\Debug\net6.0\ref\FinacialControl.WebApi.Tests.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinacialControl.WebApi.Tests\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
