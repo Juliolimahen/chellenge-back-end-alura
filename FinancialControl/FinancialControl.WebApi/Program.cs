@@ -82,9 +82,15 @@ options =>
     };
 });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+{
+    opt.SignIn.RequireConfirmedEmail = true;
+})
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
+
 
 var app = builder.Build();
 app.UseExceptionHandler("/error");

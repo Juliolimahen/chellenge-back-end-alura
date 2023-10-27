@@ -1,11 +1,12 @@
 ﻿using FinancialControl.Core.Models.User;
 using FinancialControl.Manager.Services.Interface;
-using FinancialControl.WebApi.Controllers;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+
+namespace FinancialControl.Manager.Services;
 
 public class RegistrationService : IRegistrationService
 {
@@ -20,7 +21,14 @@ public class RegistrationService : IRegistrationService
 
     public async Task<IdentityResult> RegisterUserAsync(RegisterViewModel model)
     {
-        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed=0 };
+        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+        // Gere o token de confirmação de e-mail
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        user.EmailConfirmationToken = token;
+        user.EmailConfirmationTokenExpiresAt = DateTime.UtcNow.AddHours(24); // Expira em 24 horas
+        user.IsEmailConfirmed = false;
+
         var result = await _userManager.CreateAsync(user, model.Password);
 
         if (result.Succeeded)
@@ -79,7 +87,8 @@ public class RegistrationService : IRegistrationService
             }
             catch (Exception ex)
             {
-                //Logger.LogError(ex, "Erro no envio de e-mail de confirmação.");
+                // Registre o erro usando uma biblioteca de log, se possível.
+                // Logger.LogError(ex, "Erro no envio de e-mail de confirmação.");
             }
         }
     }

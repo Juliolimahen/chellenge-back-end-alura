@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinancialControl.WebApi.Controllers;
+namespace FinancialControl.Core.Models.User;
 
 public class ConfirmEmailViewModel
 {

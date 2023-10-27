@@ -6,6 +6,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+namespace FinancialControl.Manager.Services;
+
 public class AuthService : IAuthService
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -22,12 +24,12 @@ public class AuthService : IAuthService
         _configuration = configuration;
     }
 
-    public async Task<IdentityResult> CreateUser(User model)
-    {
-        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-        var result = await _userManager.CreateAsync(user, model.Password);
-        return result;
-    }
+    //public async Task<IdentityResult> CreateUser(User model)
+    //{
+    //    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+    //    var result = await _userManager.CreateAsync(user, model.Password);
+    //    return result;
+    //}
 
     public async Task<UserToken> Login(User userInfo)
     {
