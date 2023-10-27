@@ -53,7 +53,7 @@ public class AuthService : IAuthService
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
-            new Claim("macoratti", "https://www.macoratti.net"),
+            new Claim("jota", ""),
             new Claim(JwtRegisteredClaimNames.Aud, _configuration["Jwt:Audience"]),
             new Claim(JwtRegisteredClaimNames.Iss, _configuration["Jwt:Issuer"]),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())

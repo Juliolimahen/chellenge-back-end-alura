@@ -79,16 +79,13 @@ public class RegistrationService : IRegistrationService
             }
             catch (Exception ex)
             {
-                // Lidere com erros de envio de e-mail aqui
-                // Exemplo: Logger.LogError(ex, "Erro no envio de e-mail de confirmação.");
+                //Logger.LogError(ex, "Erro no envio de e-mail de confirmação.");
             }
         }
     }
 
     private string GenerateEmailConfirmationLink(ApplicationUser user)
     {
-        // Gere o link de confirmação de e-mail aqui
-        // Este é um exemplo simples; você pode usar bibliotecas de token seguro, etc.
         return $"https://seusite.com/confirm-email?email={user.Email}&token={user.EmailConfirmationToken}";
     }
 }
