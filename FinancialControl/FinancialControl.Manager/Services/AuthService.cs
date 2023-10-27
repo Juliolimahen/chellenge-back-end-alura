@@ -44,7 +44,7 @@ public class AuthService : IAuthService
         }
         else
         {
-            return null; // Ou você pode lançar uma exceção, retornar um resultado personalizado, etc.
+            return null;
         }
     }
 

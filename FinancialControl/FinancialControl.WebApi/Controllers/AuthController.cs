@@ -2,6 +2,7 @@
 using FinancialControl.Core.Shared.Dtos.Expense;
 using FinancialControl.Core.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using FinancialControl.Manager.Services.Interface;
 
 namespace FinancialControl.WebApi.Controllers
 {
@@ -10,24 +11,40 @@ namespace FinancialControl.WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IRegistrationService _registrationService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IRegistrationService registrationService)
         {
             _authService = authService;
+            _registrationService = registrationService;
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> CreateUser([FromBody] User model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var result = await _authService.CreateUser(model);
-
+            var result = await _registrationService.RegisterUserAsync(model);
             if (result.Succeeded)
             {
-                return Ok(model);
+                return Ok("Registration successful. Please check your email to confirm your registration.");
             }
             else
             {
-                return BadRequest("Usuário ou senha inválidos");
+                return BadRequest("Registration failed. Please check the provided information.");
+            }
+        }
+
+        [HttpPost("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailViewModel model)
+        {
+            var result = await _registrationService.ConfirmEmailAsync(model);
+
+            if (result.Succeeded)
+            {
+                return Ok("Email confirmation successful.");
+            }
+            else
+            {
+                return BadRequest("Email confirmation failed.");
             }
         }
 

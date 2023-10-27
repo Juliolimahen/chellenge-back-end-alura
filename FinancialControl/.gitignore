@@ -1,0 +1,50 @@
+# Arquivos de compilação
+bin/
+obj/
+
+# Arquivos temporários
+[Tt]emp/
+[Oo]bj/
+
+# Arquivos de log
+*.log
+logs/
+
+# Visual Studio
+.vscode/
+.vs/
+
+# Arquivos de usuário
+*.user
+*.suo
+*.sln.docstates
+
+# Pasta de saída do Visual Studio
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Aa][Rr][Mm]64[Aa][Rr][Cc][Hh]/
+[Aa][Rr][Mm]64[Aa][Rr][Cc][Hh]_release/
+[Aa][Rr][Mm]64[Aa][Rr][Cc][Hh]_debug/
+[Bb]in/
+[Oo]bj/
+
+# Pasta de pacotes NuGet
+packages/
+
+# Pasta de cache do Rider
+.idea/
+
+# Pasta de cache do Visual Studio
+.vs2019/
+.vs2017/
+
+# Outros
+_ReSharper*/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

@@ -64,6 +64,7 @@ builder.Services.AddScoped<IRevenueService, RevenueService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<ISummaryService, SummaryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
 options =>
