@@ -17,3 +17,5 @@ C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manage
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manager\obj\Debug\net6.0\refint\FinancialControl.Manager.dll
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manager\obj\Debug\net6.0\FinancialControl.Manager.pdb
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manager\obj\Debug\net6.0\ref\FinancialControl.Manager.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manager\bin\Debug\net6.0\FinancialControl.Manager.runtimeconfig.json
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.Manager\obj\Debug\net6.0\FinancialControl.Manager.genruntimeconfig.cache

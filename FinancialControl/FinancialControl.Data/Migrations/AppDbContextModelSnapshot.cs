@@ -54,7 +54,7 @@ namespace FinancialControl.Data.Migrations
                         {
                             Id = 1,
                             Category = 0,
-                            Date = new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9191),
+                            Date = new DateTime(2023, 10, 27, 21, 19, 32, 680, DateTimeKind.Local).AddTicks(5911),
                             Description = "Mensalidade facul",
                             Value = 700m
                         },
@@ -62,7 +62,7 @@ namespace FinancialControl.Data.Migrations
                         {
                             Id = 2,
                             Category = 0,
-                            Date = new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9223),
+                            Date = new DateTime(2023, 10, 27, 21, 19, 32, 680, DateTimeKind.Local).AddTicks(5927),
                             Description = "Internet",
                             Value = 70m
                         });
@@ -96,14 +96,14 @@ namespace FinancialControl.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9102),
+                            Date = new DateTime(2023, 10, 27, 21, 19, 32, 680, DateTimeKind.Local).AddTicks(5850),
                             Description = "Salário",
                             Value = 3000m
                         },
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9161),
+                            Date = new DateTime(2023, 10, 27, 21, 19, 32, 680, DateTimeKind.Local).AddTicks(5892),
                             Description = "Salário bônus",
                             Value = 3000m
                         });

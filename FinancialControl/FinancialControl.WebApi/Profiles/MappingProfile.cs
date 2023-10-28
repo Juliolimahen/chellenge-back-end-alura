@@ -17,7 +17,6 @@ public class MappingProfile : Profile
         CreateMap<User, ConfirmEmailViewModel>().ReverseMap();
         CreateMap<User, RegisterViewModel>().ReverseMap();
         CreateMap<ApplicationUser, RegisterViewModel>().ReverseMap();
-        CreateMap<ApplicationUser, ConfirmEmailViewModel>().ReverseMap();
+       CreateMap<ApplicationUser, ConfirmEmailViewModel>().ReverseMap();
     }
-
 }

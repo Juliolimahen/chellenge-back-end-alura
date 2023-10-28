@@ -34,7 +34,7 @@ namespace FinancialControl.WebApi.Controllers
         }
 
         [HttpPost("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(ConfirmEmailViewModel model)
+        public async Task<IActionResult> ConfirmEmail( ConfirmEmailViewModel model)
         {
             var result = await _registrationService.ConfirmEmailAsync(model);
 

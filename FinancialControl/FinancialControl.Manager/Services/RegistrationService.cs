@@ -95,6 +95,6 @@ public class RegistrationService : IRegistrationService
 
     private string GenerateEmailConfirmationLink(ApplicationUser user)
     {
-        return $"https://seusite.com/confirm-email?email={user.Email}&token={user.EmailConfirmationToken}";
+        return $"https://localhost:7053/api/Auth/ConfirmEmail?email={user.Email}&token={user.EmailConfirmationToken}";
     }
 }

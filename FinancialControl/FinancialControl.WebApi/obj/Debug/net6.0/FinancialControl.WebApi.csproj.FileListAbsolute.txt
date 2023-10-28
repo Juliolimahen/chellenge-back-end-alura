@@ -98,3 +98,10 @@ C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\MailKit.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\MimeKit.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\ws-projetos\chellenge-back-end-alura\FinancialControl\FinancialControl.WebApi\obj\Debug\net6.0\FinancialControl.WebApi.MvcApplicationPartsAssemblyInfo.cs
