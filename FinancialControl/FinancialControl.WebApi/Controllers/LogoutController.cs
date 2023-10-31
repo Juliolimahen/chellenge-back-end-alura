@@ -1,4 +1,6 @@
-﻿using FinancialControl.Manager.Services.Interface;
+﻿using FinancialControl.Core.Shared.Dtos.Requests;
+using FinancialControl.Core.Shared.Dtos;
+using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,14 +23,14 @@ public class LogoutController : ControllerBase
         try
         {
             IdentityResult resultado = await _logoutService.LogoutUser();
-            if (resultado.Succeeded)
-            {
-                return Ok("Logout successful.");
-            }
-            else
-            {
-                return BadRequest(resultado.Errors);
-            }
+            return resultado.Succeeded
+                ? Ok("Logout successful.")
+                : BadRequest(
+                    new ResponseDto<LoginRequest>
+                    {
+                        Success = false,
+                        Erros = (List<string>)resultado.Errors
+                    });
         }
         catch (Exception ex)
         {

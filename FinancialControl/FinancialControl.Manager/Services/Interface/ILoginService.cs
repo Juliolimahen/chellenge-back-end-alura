@@ -6,5 +6,5 @@ namespace FinancialControl.Manager.Services.Interface;
 
 public interface ILoginService
 {
-    Task<Token> UserLoginAsync(LoginRequest request);
+    Task<LoggedUser> UserLoginAsync(LoginRequest request);
 }

@@ -10,7 +10,7 @@ namespace FinancialControl.Manager.Services;
 
 public class TokenService : ITokenService
 {
-    public async Task<Token> CreateToken(IdentityUser<int> usuario)
+    public Token CreateToken(IdentityUser<int> usuario)
     {
         Claim[] direitosUsuario = new Claim[]
         {

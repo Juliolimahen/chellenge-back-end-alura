@@ -40,4 +40,8 @@
     <ProjectReference Include="..\FinancialControl.Manager\FinancialControl.Manager.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Profiles\" />
+  </ItemGroup>
+
 </Project>

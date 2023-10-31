@@ -29,16 +29,13 @@ public class RevenueController : ControllerBase
     {
         var response = await _revenueService.GetRevenuesAsync(description);
 
-        if (response.Success && response.Data.Any())
-        {
-            return Ok(response);
-        }
-
-        return NotFound(new ResponseDto<IEnumerable<RevenueDto>>
-        {
-            Success = false,
-            Erros = new List<string> { "No revenues found for this description." }
-        });
+        return response.Success && response.Data.Any()
+            ? Ok(response)
+            : NotFound(new ResponseDto<IEnumerable<RevenueDto>>
+            {
+                Success = false,
+                Erros = new List<string> { "No revenues found for this description." }
+            });
     }
 
     /// <summary>
@@ -86,12 +83,7 @@ public class RevenueController : ControllerBase
 
         var response = await _revenueService.CreateRevenueAsync(revenueDto);
 
-        if (response.Success)
-        {
-            return CreatedAtAction("GetById", new { id = response.Data.Id }, response);
-        }
-
-        return BadRequest(response);
+        return response.Success ? CreatedAtAction("GetById", new { id = response.Data.Id }, response) : BadRequest(response);
     }
 
     /// <summary>
@@ -116,12 +108,7 @@ public class RevenueController : ControllerBase
 
         var response = await _revenueService.UpdateRevenueAsync(revenueDto);
 
-        if (response.Success)
-        {
-            return Ok(response);
-        }
-
-        return BadRequest(response);
+        return response.Success ? Ok(response) : BadRequest(response);
     }
 
     /// <summary>
@@ -162,15 +149,12 @@ public class RevenueController : ControllerBase
     {
         var response = await _revenueService.GetRevenueByDateAsync(year, month);
 
-        if (response.Success && response.Data.Any())
-        {
-            return Ok(response);
-        }
-
-        return NotFound(new ResponseDto<IEnumerable<RevenueDto>>
-        {
-            Success = false,
-            Erros = new List<string> { "No revenues found for this date." }
-        });
+        return response.Success && response.Data.Any()
+            ? Ok(response)
+            : NotFound(new ResponseDto<IEnumerable<RevenueDto>>
+            {
+                Success = false,
+                Erros = new List<string> { "No revenues found for this date." }
+            });
     }
 }

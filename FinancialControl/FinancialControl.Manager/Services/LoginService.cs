@@ -1,4 +1,4 @@
-﻿using FinancialControl.Core.Models;
+﻿using AutoMapper;
 using FinancialControl.Core.Shared.Dtos.Requests;
 using FinancialControl.Manager.Services.Interface;
 using Microsoft.AspNetCore.Identity;
@@ -9,37 +9,39 @@ public class LoginService : ILoginService
 {
     private SignInManager<IdentityUser<int>> _signInManager;
     private readonly ITokenService _tokenService;
+    private readonly IMapper _mapper;
 
     public LoginService(SignInManager<IdentityUser<int>> signInManager,
-        ITokenService tokenService)
+        ITokenService tokenService,
+        IMapper mapper
+        )
     {
         _signInManager = signInManager;
         _tokenService = tokenService;
+        _mapper = mapper;
     }
 
-    public async Task<Token> UserLoginAsync(LoginRequest request)
+    public async Task<LoggedUser> UserLoginAsync(LoginRequest request)
     {
-        var resultadoIdentity = await _signInManager
-            .PasswordSignInAsync(request.Username, request.Password, false, false);
+        var resultadoIdentity = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, false, false);
 
-        if (resultadoIdentity.Succeeded)
-        {
-            var identityUser = await _signInManager.UserManager.FindByNameAsync(request.Username);
-
-            if (identityUser != null)
-            {
-                Token token = await _tokenService.CreateToken(identityUser);
-
-                return token;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        else
+        if (!resultadoIdentity.Succeeded)
         {
             return null;
         }
+
+        var identityUser = await _signInManager.UserManager.FindByNameAsync(request.UserName);
+
+        if (identityUser == null)
+        {
+            return null;
+        }
+
+        //var userLogado = new LoggedUser();
+        var userLogado = _mapper.Map<LoggedUser>(identityUser);
+        //userLogado.UserName = identityUser.UserName;
+        userLogado.Token = _tokenService.CreateToken(identityUser);
+
+        return userLogado;
     }
 }

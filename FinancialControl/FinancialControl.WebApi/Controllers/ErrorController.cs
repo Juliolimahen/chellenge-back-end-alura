@@ -9,16 +9,17 @@ namespace FinancialControl.WebApi.Controllers;
 public class ErrorController : ControllerBase
 {
     [Route("error")]
-    public ResponseDto<object> Error()
+    public IActionResult Error()
     {
-        ResponseDto<object> response = new ResponseDto<object>();
-        Response.StatusCode = 500;
-        var id = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+        var errorId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
 
-        response.Success = false;
-        response.Data = null;
-        response.Erros.Add(id);
+        var response = new ResponseDto<object>
+        {
+            Success = false,
+            Data = null,
+            Erros = new List<string> { "An error occurred. Please try again later." },
+        };
 
-        return response;
+        return StatusCode(500, response);
     }
 }

@@ -13,8 +13,6 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 var sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Add services to the container.
-
 builder.Services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(sqlServerConnection,
              b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
@@ -29,7 +27,6 @@ builder.Services
 
 builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
@@ -93,21 +90,10 @@ options =>
     };
 });
 
-
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
-//{
-//    opt.SignIn.RequireConfirmedEmail = true;
-//})
-//.AddEntityFrameworkStores<AppDbContext>()
-//.AddDefaultTokenProviders();
-
-
-
 var app = builder.Build();
 app.UseExceptionHandler("/error");
 app.UseExceptionHandler("/404");
 app.UseExceptionHandler("/500");
-
 
 app.UseStatusCodePagesWithReExecute("/error/{0}");
 

@@ -1,7 +1,9 @@
-﻿namespace FinancialControl.Core.Shared.Dtos.Requests;
+﻿using FinancialControl.Core.Models;
+
+namespace FinancialControl.Core.Shared.Dtos.Requests;
 
 public class LoggedUser
 {
-    public string Login { get; set; }
-    public string Token { get; set; }
+    public string UserName { get; set; }
+    public Token Token { get; set; }
 }

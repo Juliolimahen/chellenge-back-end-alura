@@ -20,7 +20,5 @@ public class SummaryController : ControllerBase
     [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(SummaryDto), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSummary([FromRoute] int year, [FromRoute] int month)
-    {
-        return Ok(await _summaryService.GetSummary(year, month));
-    }
+        => Ok(await _summaryService.GetSummary(year, month));
 }

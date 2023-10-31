@@ -5,7 +5,7 @@ namespace FinancialControl.Core.Shared.Dtos.User;
 public class CreateUserDto
 {
     [Required]
-    public string Username { get; set; }
+    public string UserName { get; set; }
     [Required]
     public string Email { get; set; }
     [DataType(DataType.Password)]

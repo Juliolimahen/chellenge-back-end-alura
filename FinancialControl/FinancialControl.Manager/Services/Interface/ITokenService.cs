@@ -5,6 +5,6 @@ namespace FinancialControl.Manager.Services.Interface
 {
     public interface ITokenService
     {
-        Task<Token> CreateToken(IdentityUser<int> usuario);
+        Token CreateToken(IdentityUser<int> usuario);
     }
 }

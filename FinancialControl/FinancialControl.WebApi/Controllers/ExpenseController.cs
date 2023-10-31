@@ -1,6 +1,7 @@
 ﻿using FinancialControl.Core.Shared.Dtos;
 using FinancialControl.Core.Shared.Dtos.Expense;
 using FinancialControl.Manager.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialControl.WebApi.Controllers;
@@ -29,16 +30,13 @@ public class ExpenseController : ControllerBase
     {
         var response = await _expenseService.GetExpensesAsync(description);
 
-        if (response.Success && response.Data.Any())
-        {
-            return Ok(response);
-        }
-
-        return NotFound(new ResponseDto<IEnumerable<ExpenseDto>>
-        {
-            Success = false,
-            Erros = new List<string> { "No expenses found for this description." }
-        });
+        return response.Success && response.Data.Any()
+            ? Ok(response)
+            : NotFound(new ResponseDto<IEnumerable<ExpenseDto>>
+            {
+                Success = false,
+                Erros = new List<string> { "No expenses found for this description." }
+            });
     }
 
     /// <summary>
@@ -53,16 +51,13 @@ public class ExpenseController : ControllerBase
     {
         var response = await _expenseService.GetExpenseByIdAsync(id);
 
-        if (response.Data != null)
-        {
-            return Ok(response);
-        }
-
-        return NotFound(new ResponseDto<ExpenseDto>
-        {
-            Success = false,
-            Erros = new List<string> { "Expense not found for this Id." }
-        });
+        return response.Data != null
+            ? Ok(response)
+            : NotFound(new ResponseDto<ExpenseDto>
+            {
+                Success = false,
+                Erros = new List<string> { "Expense not found for this Id." }
+            });
     }
 
     /// <summary>
@@ -86,12 +81,7 @@ public class ExpenseController : ControllerBase
 
         var response = await _expenseService.CreateExpenseAsync(expenseDto);
 
-        if (response.Success)
-        {
-            return CreatedAtAction("GetById", new { id = response.Data.Id }, response);
-        }
-
-        return BadRequest(response);
+        return response.Success ? CreatedAtAction("GetById", new { id = response.Data.Id }, response) : BadRequest(response);
     }
 
     /// <summary>
@@ -116,12 +106,7 @@ public class ExpenseController : ControllerBase
 
         var response = await _expenseService.UpdateExpenseAsync(expenseDto);
 
-        if (response.Success)
-        {
-            return Ok(response);
-        }
-
-        return BadRequest(response);
+        return response.Success ? Ok(response) : BadRequest(response);
     }
 
     /// <summary>
@@ -162,15 +147,12 @@ public class ExpenseController : ControllerBase
     {
         var response = await _expenseService.GetExpenseByDateAsync(year, month);
 
-        if (response.Success && response.Data.Any())
-        {
-            return Ok(response);
-        }
-
-        return NotFound(new ResponseDto<IEnumerable<ExpenseDto>>
-        {
-            Success = false,
-            Erros = new List<string> { "No expenses found for this date." }
-        });
+        return response.Success && response.Data.Any()
+            ? Ok(response)
+            : NotFound(new ResponseDto<IEnumerable<ExpenseDto>>
+            {
+                Success = false,
+                Erros = new List<string> { "No expenses found for this date." }
+            });
     }
 }
