@@ -14,8 +14,6 @@ namespace FinancialControl.Manager.Profiles
             CreateMap<Expense, ExpenseDto>().ReverseMap();
             CreateMap<Revenue, CreateRevenueDto>().ReverseMap();
             CreateMap<Expense, CreateExpenseDto>().ReverseMap();
-            CreateMap<ApplicationUser, User>().ReverseMap();
-            CreateMap<ApplicationUser, RegisterViewModel>().ReverseMap();
         }
     }
 }

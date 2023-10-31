@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using FinancialControl.Core.Models.User;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +18,14 @@ var sqlServerConnection = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(sqlServerConnection,
              b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+
+builder.Services
+    .AddIdentity<IdentityUser<int>, IdentityRole<int>>(opt =>
+    {
+        opt.SignIn.RequireConfirmedEmail = true;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
 
@@ -63,8 +70,12 @@ builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 builder.Services.AddScoped<IRevenueService, RevenueService>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<ISummaryService, SummaryService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ILogoutService, LogoutService>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
 options =>
@@ -83,12 +94,12 @@ options =>
 });
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
-{
-    opt.SignIn.RequireConfirmedEmail = true;
-})
-.AddEntityFrameworkStores<AppDbContext>()
-.AddDefaultTokenProviders();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+//{
+//    opt.SignIn.RequireConfirmedEmail = true;
+//})
+//.AddEntityFrameworkStores<AppDbContext>()
+//.AddDefaultTokenProviders();
 
 
 

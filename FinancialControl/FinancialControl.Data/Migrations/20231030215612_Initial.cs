@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinancialControl.Data.Migrations
 {
-    public partial class AddFieldsTableUser : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace FinancialControl.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,10 +28,8 @@ namespace FinancialControl.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EmailConfirmationToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailConfirmationTokenExpiresAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsEmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -52,12 +51,43 @@ namespace FinancialControl.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Expenses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Value = table.Column<decimal>(type: "decimal(20,2)", precision: 20, scale: 2, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Revenues",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Value = table.Column<decimal>(type: "decimal(20,2)", precision: 20, scale: 2, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Revenues", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -78,7 +108,7 @@ namespace FinancialControl.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -100,7 +130,7 @@ namespace FinancialControl.Data.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,8 +147,8 @@ namespace FinancialControl.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,7 +171,7 @@ namespace FinancialControl.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -157,33 +187,23 @@ namespace FinancialControl.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
                 table: "Expenses",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "Date",
-                value: new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9191));
+                columns: new[] { "Id", "Category", "Date", "Description", "Value" },
+                values: new object[,]
+                {
+                    { 1, 0, new DateTime(2023, 10, 30, 18, 56, 12, 545, DateTimeKind.Local).AddTicks(1881), "Mensalidade facul", 700m },
+                    { 2, 0, new DateTime(2023, 10, 30, 18, 56, 12, 545, DateTimeKind.Local).AddTicks(1902), "Internet", 70m }
+                });
 
-            migrationBuilder.UpdateData(
-                table: "Expenses",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "Date",
-                value: new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9223));
-
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
                 table: "Revenues",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "Date",
-                value: new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9102));
-
-            migrationBuilder.UpdateData(
-                table: "Revenues",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "Date",
-                value: new DateTime(2023, 10, 26, 21, 17, 59, 371, DateTimeKind.Local).AddTicks(9161));
+                columns: new[] { "Id", "Date", "Description", "Value" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 10, 30, 18, 56, 12, 545, DateTimeKind.Local).AddTicks(1817), "Salário", 3000m },
+                    { 2, new DateTime(2023, 10, 30, 18, 56, 12, 545, DateTimeKind.Local).AddTicks(1862), "Salário bônus", 3000m }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -243,38 +263,16 @@ namespace FinancialControl.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Expenses");
+
+            migrationBuilder.DropTable(
+                name: "Revenues");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.UpdateData(
-                table: "Expenses",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "Date",
-                value: new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2156));
-
-            migrationBuilder.UpdateData(
-                table: "Expenses",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "Date",
-                value: new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2614));
-
-            migrationBuilder.UpdateData(
-                table: "Revenues",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "Date",
-                value: new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2058));
-
-            migrationBuilder.UpdateData(
-                table: "Revenues",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "Date",
-                value: new DateTime(2023, 10, 20, 11, 54, 45, 459, DateTimeKind.Local).AddTicks(2128));
         }
     }
 }
