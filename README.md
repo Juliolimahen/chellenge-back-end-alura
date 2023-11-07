@@ -32,7 +32,7 @@ Esta é uma API .NET Core para o controle de finanças pessoais, que foi desenvo
     dotnet run
     ```
 
-A API estará disponível em [http://localhost:5000](http://localhost:5000).
+A API estará disponível em ... 
 
 ## Endpoints
 
