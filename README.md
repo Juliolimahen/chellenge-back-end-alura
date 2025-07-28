@@ -121,9 +121,6 @@ Contribuições são bem-vindas! Se você deseja contribuir, siga estas etapas:
 4. Push para o branch (`git push origin feature/nova-feature`).
 5. Abra um pull request.
 
-## Documentação
-
-Em construção...
 
 ## Licença
 
