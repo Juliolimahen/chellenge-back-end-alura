@@ -111,6 +111,9 @@ Cria uma nova conta de usuário.
         - `success` (boolean): `false`.
         - `erros` (array de strings): Lista de erros, por exemplo, "Erro ao criar conta de usuário."
 
+
+![swagger](https://raw.githubusercontent.com/Juliolimahen/assets/refs/heads/main/api-financas/swagger.png)
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você deseja contribuir, siga estas etapas:
